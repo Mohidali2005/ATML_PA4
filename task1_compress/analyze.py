@@ -139,6 +139,7 @@ def sensitivity_figures(res,out):
     fig,axes = plt.subplots(1,3,figsize=(9.4,3.0),gridspec_kw={"width_ratios":[1.3,1,1]})
     im = axes[0].imshow(np.log10(np.clip(grid.values,1e-4,None)),aspect="auto",origin="lower",cmap="viridis")
     axes[0].set_yticks(range(len(grid.index)),[f"{v:.2f}" for v in grid.index])
+    axes[0].set_xticks(range(0,len(grid.columns),3),grid.columns[::3])
     axes[0].set_xlabel("block")
     axes[0].set_ylabel("sparsity of that block alone")
     axes[0].set_title("(a) log10 calibration nll rise",fontsize=9)
@@ -167,6 +168,7 @@ def sensitivity_figures(res,out):
         g = q[q.bits == b].pivot(index="proj",columns="block",values="delta").loc[names]
         im = ax.imshow(np.log10(np.clip(g.values,1e-5,None)),aspect="auto",cmap="viridis")
         ax.set_yticks(range(len(names)),names,fontsize=7)
+        ax.set_xticks(range(0,len(g.columns),3),g.columns[::3])
         ax.set_title(f"({'a' if b == 3 else 'b'}) log10 nll rise at {b} bits, one projection alone",fontsize=9)
         fig.colorbar(im,ax=ax,fraction=0.04)
     cmap = matplotlib.colors.ListedColormap(["firebrick","darkorange","steelblue","seagreen"])
@@ -178,6 +180,7 @@ def sensitivity_figures(res,out):
             m = np.array([[[2,3,4,8].index(alloc["bits"][f"{i}.{n}"]) for i in blocks] for n in names])
             ax.imshow(m,aspect="auto",cmap=cmap,vmin=-0.5,vmax=3.5)
             ax.set_yticks(range(len(names)),names,fontsize=7)
+            ax.set_xticks(range(0,len(blocks),3),blocks[::3])
             ax.set_title(f"({letter}) bits under the INT{budget} budget, {alloc['design']}",fontsize=9)
         ax.set_xlabel("block")
     patches = [matplotlib.patches.Patch(color=c,label=f"{b} bits") for c,b in zip(cmap.colors,(2,3,4,8))]

@@ -56,12 +56,13 @@ def hellaswag(cfg,count=None):
     return out
 
 
-def sha256(path):
-    """Hash a file in chunks"""
+def content_hash(path):
+    """Hash the records of a gzipped jsonl file so that compression and line endings do not matter"""
     h = hashlib.sha256()
-    with open(path,"rb") as f:
-        for block in iter(lambda:f.read(1<<20),b""):
-            h.update(block)
+    with gzip.open(path,"rt",encoding="utf-8") as f:
+        for line in f:
+            if line.strip():
+                h.update(json.dumps(json.loads(line),sort_keys=True,ensure_ascii=False).encode("utf-8")+b"\n")
     return h.hexdigest()
 
 
@@ -73,7 +74,7 @@ def main():
     args = ap.parse_args()
     cfg = load_yaml(args.config)
     data_dir = repo_path(cfg["paths"]["data_dir"])
-    sums = {name:sha256(data_dir/f"{name}_locked.jsonl.gz") for name in LOCKED}
+    sums = {name:content_hash(data_dir/f"{name}_locked.jsonl.gz") for name in LOCKED}
     if args.write_lock:
         shutil.copy(data_dir.parent/"local_source_revisions.json",repo_path(cfg["paths"]["lock"]))
         save_json(cfg["paths"]["checksums"],sums)
@@ -81,8 +82,8 @@ def main():
     if args.verify:
         expected = load_json(cfg["paths"]["checksums"])
         bad = [name for name in LOCKED if sums[name] != expected[name]]
-        assert not bad,f"locked files differ from the committed checksums {bad}"
-        print("all",len(sums),"locked files match the committed checksums")
+        assert not bad,f"locked records differ from the committed hashes {bad}"
+        print("all",len(sums),"locked files hold the committed records")
 
 
 if __name__ == "__main__":

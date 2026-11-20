@@ -11,7 +11,7 @@ pip install -r requirements.txt
 bash scripts/get_data.sh
 ```
 
-`scripts/get_data.sh` clones the course data repository at a fixed commit and runs its `setup_data.py --public` script. That script downloads the fixed public rows and builds the tokenized windows. It reuses the source revisions pinned in `configs/data_lock/local_source_revisions.json`, then checks every built file against `configs/data_lock/sha256.json`. A run that does not reproduce the same files stops at this point. Raw datasets and model weights are never committed.
+`scripts/get_data.sh` clones the course data repository at a fixed commit and runs its `setup_data.py --public` script. That script downloads the fixed public rows and builds the tokenized windows. It reuses the source revisions pinned in `configs/data_lock/local_source_revisions.json`, then checks the records of every built file against the hashes in `configs/data_lock/sha256.json`. The hashes are taken over the decompressed records, so gzip headers and line endings do not affect them. A run that does not reproduce the same files stops at this point. Raw datasets and model weights are never committed.
 
 ## Task 1: Pruning and quantization of Qwen2.5-1.5B
 

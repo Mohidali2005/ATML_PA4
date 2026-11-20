@@ -1,0 +1,93 @@
+# every setting used by the compression study, fixed before any held out result exists
+seed: 6304
+
+model:
+  name: Qwen/Qwen2.5-1.5B
+  dtype: float16
+  attn: sdpa
+
+paths:
+  data_dir: data/course/data/public_locked
+  lock: configs/data_lock/local_source_revisions.json
+  checksums: configs/data_lock/sha256.json
+  results_dir: results/task1
+  artifacts_dir: outputs/task1/artifacts
+
+# the seven projections of every block that may be compressed
+eligible: [q_proj,k_proj,v_proj,o_proj,gate_proj,up_proj,down_proj]
+
+eval:
+  window_batch: 8
+  hellaswag_batch: 8
+  hellaswag_full: 2000
+  hellaswag_subset: 512
+  # conditions that get all 2000 hellaswag rows, the rest get the first 512
+  full_hellaswag: [fp16,p1_s50,p2_s50,p3_s50,q1_b4,q1_b3,q2_b4,q2_b3,q3_int4,q3_int3]
+
+calib:
+  micro_batch: 8
+
+prune:
+  sparsities: [0.25,0.5,0.75]
+
+quant:
+  bits: [8,4,3]
+  group: 128
+  # alpha takes the values 0 0.05 up to 0.95
+  awq_grid: 20
+  scale_floor: 1.0e-5
+
+p3:
+  targets: [0.5,0.75]
+  min: 0.10
+  max: 0.85
+  probe_levels: [0.10,0.25,0.40,0.50,0.60,0.75,0.85]
+  grid_step: 0.05
+  owl_m: 5
+  owl_lambdas: [0.04,0.08,0.12]
+  # candidate order also breaks ties on the development set
+  candidates: [measured,owl_0.04,owl_0.08,owl_0.12]
+
+q3:
+  bits: [2,3,4,8]
+  budgets: [4,3]
+  candidates: [measured,local]
+
+selection:
+  criterion: development pooled nll, lower is better
+
+timing:
+  warmup: 3
+  reps: 10
+  prefill: [512,2048]
+  decode_prompt: 512
+  decode_tokens: 64
+  # the packed path unpacks every weight on each call so it gets a shorter protocol
+  packed_warmup: 1
+  packed_reps: 5
+  packed_decode_tokens: 16
+  packed_conditions: [p2_s50,p2_s75,q2_b4,q2_b3,q3_int4,q3_int3]
+
+qualitative:
+  # cases are picked in manifest order from the first 512 hellaswag rows
+  hellaswag_models: [p2_s50,p3_s50,q2_b3,q3_int3]
+  hellaswag_flips: 2
+  hellaswag_fixes: 1
+  continuation_models: [fp16,p2_s75,p3_s75,q2_b3,q3_int3]
+  new_tokens: 32
+  prompts:
+    - "The capital of France is Paris, and the capital of Japan is"
+    - "To make a cup of tea, first boil the water, then"
+
+bootstrap:
+  resamples: 10000
+
+# sizes for the quick pass that runs every stage before the full run
+smoke:
+  calib_sequences: 4
+  dev_sequences: 4
+  windows: 4
+  hellaswag_rows: 8
+  probe_blocks: 2
+  awq_grid: 4
+  timing_reps: 2

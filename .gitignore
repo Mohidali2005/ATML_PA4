@@ -1,0 +1,23 @@
+# python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# caches and big files
+.cache/
+hf_cache/
+outputs/
+data/
+*.zip
+*.pt
+*.safetensors
+*.npz
+
+# assignment manual
+ATML_PA4.pdf
+
+# report source (only the compiled pdf is committed)
+report_latex/
+
+# smoke runs
+results/task1_smoke/

@@ -17,6 +17,9 @@ COLOR = {"fp16":"black","p1":"steelblue","p2":"darkorange","p3":"seagreen","q1":
 PROJ_COLOR = {"q_proj":"steelblue","k_proj":"darkorange","v_proj":"seagreen","o_proj":"firebrick",
               "gate_proj":"mediumpurple","up_proj":"saddlebrown","down_proj":"gray"}
 PAIRS = [("p3_s50","p2_s50"),("p3_s75","p2_s75"),("q3_int4","q2_b4"),("q3_int3","q2_b3")]
+# matched method comparisons beyond the two adaptive ones
+METHOD_PAIRS = [("p2_s25","p1_s25"),("p2_s50","p1_s50"),("p2_s75","p1_s75"),("p2_24","p2_s50"),
+                ("q2_b8","q1_b8"),("q2_b4","q1_b4"),("q2_b3","q1_b3")]
 
 
 def family(name):
@@ -77,7 +80,8 @@ def summary(res,scores,cfg,n_boot):
                "storage_gb":storage/1e9,"calib_nll":s["calib_nll"],"dev_ppl":s["dev"]["ppl"],
                "wikitext_ppl":s["wikitext"]["ppl"],"c4_ppl":s["c4"]["ppl"],"hellaswag_rows":s["hellaswag"]["rows"],
                "acc":100*s["hellaswag"]["acc"],"acc_norm":100*s["hellaswag"]["acc_norm"],
-               "acc_norm_first512":100*subset_acc(res,name,cfg["eval"]["hellaswag_subset"])}
+               "acc_norm_first512":100*subset_acc(res,name,cfg["eval"]["hellaswag_subset"]),
+               "mean_rel_error":table(res,name,"calib_errors")["rel_error"].mean() if name != "fp16" else 0.0}
         if name != "fp16":
             for r in compare(res,name,"fp16",n_boot,cfg["seed"]):
                 key = r["metric"].replace("_points","")
@@ -86,16 +90,49 @@ def summary(res,scores,cfg,n_boot):
     return pd.DataFrame(rows)
 
 
+def carryover(res,scores,cfg):
+    """Development nll and held out perplexity of every allocation candidate with both rankings"""
+    rows = []
+    for kind,prefix in (("p3","p3_s"),("q3","q3_int")):
+        dev = pd.read_csv(res/"selection"/f"{kind}_candidates_dev.csv")
+        audit = pd.read_csv(res/"selection"/f"{kind}_audit_test.csv")
+        choice = load_json(res/"selection"/f"{kind}_selection.json")
+        for target,group in dev.groupby("target"):
+            label = round(100*target) if kind == "p3" else int(target)
+            picked = choice[str(target)]["selected"]
+            for _,r in group.iterrows():
+                if r["design"] == picked:
+                    s = scores[f"{prefix}{label}"]
+                    wiki,c4 = s["wikitext"]["ppl"],s["c4"]["ppl"]
+                else:
+                    a = audit[(audit.target == target) & (audit.design == r["design"])].iloc[0]
+                    wiki,c4 = a["wikitext"],a["c4"]
+                rows.append({"method":kind,"target":target,"design":r["design"],"selected":r["design"] == picked,
+                             "dev_nll":r["dev_nll"],"wikitext_ppl":wiki,"c4_ppl":c4})
+    df = pd.DataFrame(rows)
+    for col in ("dev_nll","wikitext_ppl","c4_ppl"):
+        df[f"{col}_rank"] = df.groupby(["method","target"])[col].rank(method="min").astype(int)
+    return df
+
+
 def legend_below(fig,axes,ncol):
     """Put one shared legend under the panels"""
     handles,labels = axes[0].get_legend_handles_labels()
     fig.legend(handles,labels,loc="lower center",ncol=ncol,frameon=False,bbox_to_anchor=(0.5,-0.02))
 
 
+def plain_log(ax,axis,ticks):
+    """Label a log axis with plain numbers at the given ticks"""
+    target = ax.xaxis if axis == "x" else ax.yaxis
+    target.set_major_locator(matplotlib.ticker.FixedLocator(ticks))
+    target.set_major_formatter(matplotlib.ticker.FuncFormatter(lambda v,_:f"{v:g}"))
+    target.set_minor_formatter(matplotlib.ticker.NullFormatter())
+
+
 def tradeoff_figures(df,out):
     """Quality against sparsity for pruning and against packed bytes for quantization"""
     metrics = [("wikitext_ppl","WikiText-2 perplexity",True),("c4_ppl","C4 perplexity",True),
-               ("acc_norm_first512","HellaSwag acc_norm on 512 rows (%)",False)]
+               ("acc_norm_first512","HellaSwag acc_norm (%)",False)]
     base = df[df.condition == "fp16"].iloc[0]
     fig,axes = plt.subplots(1,3,figsize=(9.4,3.2))
     for ax,(col,label,log) in zip(axes,metrics):
@@ -109,6 +146,7 @@ def tradeoff_figures(df,out):
         ax.set_ylabel(label)
         if log:
             ax.set_yscale("log")
+    axes[2].set_title("first 512 rows",fontsize=9)
     legend_below(fig,axes,5)
     fig.tight_layout(rect=(0,0.08,1,1))
     fig.savefig(out/"pruning_tradeoff.png",dpi=200,bbox_inches="tight")
@@ -122,8 +160,7 @@ def tradeoff_figures(df,out):
                     ls="-" if fam != "q3" else "none")
         ax.set_xlabel("packed model size (GB)")
         ax.set_ylabel(label)
-        if log:
-            ax.set_yscale("log")
+    axes[2].set_title("first 512 rows",fontsize=9)
     legend_below(fig,axes,4)
     fig.tight_layout(rect=(0,0.08,1,1))
     fig.savefig(out/"quantization_tradeoff.png",dpi=200,bbox_inches="tight")
@@ -203,7 +240,7 @@ def agreement_figure(res,cfg,out):
             ax.plot(d["block"],100*d["overlap"],color=color,lw=1.2,label=n)
         ax.set_title(f"{round(100*s)}% sparsity",fontsize=9)
         ax.set_xlabel("block")
-    axes[0].set_ylabel("Wanda removals also removed by magnitude (%)")
+    axes[0].set_ylabel("overlap with magnitude mask (%)")
     legend_below(fig,axes,7)
     fig.tight_layout(rect=(0,0.08,1,1))
     fig.savefig(out/"mask_agreement.png",dpi=200,bbox_inches="tight")
@@ -215,7 +252,7 @@ def calibration_figure(df,out):
     fig,axes = plt.subplots(1,3,figsize=(9.4,3.0))
     stats = {}
     for ax,(col,label) in zip(axes,(("wikitext_ppl","WikiText-2 perplexity"),("c4_ppl","C4 perplexity"),
-                                    ("acc_norm_first512","HellaSwag acc_norm on 512 rows (%)"))):
+                                    ("acc_norm_first512","HellaSwag acc_norm (%)"))):
         for fam in ("fp16","p1","p2","p3","q1","q2","q3"):
             d = df[df.condition.map(family) == fam]
             ax.scatter(d["calib_nll"],d[col],color=COLOR[fam],marker="o" if fam[0] != "q" else "^",s=18,
@@ -223,13 +260,14 @@ def calibration_figure(df,out):
         rho = spearmanr(df["calib_nll"],df[col]).correlation
         stats[col] = rho
         ax.set_xscale("log")
+        plain_log(ax,"x",[3,5,10])
         if col != "acc_norm_first512":
             ax.set_yscale("log")
         ax.set_xlabel("calibration nll")
         ax.set_ylabel(label)
-        ax.set_title(f"Spearman {rho:.2f}",fontsize=9)
-    legend_below(fig,axes,7)
-    fig.tight_layout(rect=(0,0.1,1,1))
+        ax.set_title(f"Spearman {rho:.2f}"+(", first 512 rows" if col == "acc_norm_first512" else ""),fontsize=9)
+    legend_below(fig,axes,4)
+    fig.tight_layout(rect=(0,0.14,1,1))
     fig.savefig(out/"calibration_vs_heldout.png",dpi=200,bbox_inches="tight")
     plt.close(fig)
     return stats
@@ -279,6 +317,9 @@ def main():
     df.to_csv(tables/"summary.csv",index=False)
     boot = [r for a,b in PAIRS if a in scores and b in scores for r in compare(res,a,b,n_boot,cfg["seed"])]
     pd.DataFrame(boot).to_csv(tables/"bootstrap.csv",index=False)
+    extra = [r for a,b in METHOD_PAIRS if a in scores and b in scores for r in compare(res,a,b,n_boot,cfg["seed"])]
+    pd.DataFrame(extra).to_csv(tables/"method_pairs.csv",index=False)
+    carryover(res,scores,cfg).to_csv(tables/"selection_carryover.csv",index=False)
     checks = []
     for a,b in PAIRS:
         if a in scores and b in scores:
@@ -295,6 +336,10 @@ def main():
         r["compress_seconds"] = r["condition"].map(lambda n:scores[n].get("compress_seconds"))
         r["compress_peak_gb"] = r["condition"].map(lambda n:scores[n].get("compress_peak_gb"))
         r.to_csv(tables/"resources.csv",index=False)
+        if "fp16_end" in set(t["condition"]):
+            drift = t.set_index("condition").loc[["fp16","fp16_end"],["prefill_512_ms","prefill_2048_ms","decode_ms_per_token"]]
+            drift.loc["end_over_start"] = drift.loc["fp16_end"]/drift.loc["fp16"]
+            drift.to_csv(tables/"timing_drift.csv")
     tradeoff_figures(df,figs)
     if (res/"sensitivity"/"p3_block_probes.csv").exists() and (res/"sensitivity"/"q3_projection_probes.csv").exists():
         sensitivity_figures(res,figs)

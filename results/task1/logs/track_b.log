@@ -1,0 +1,8 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1795446783.895230     273 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+q2_b8 wikitext 16.125 c4 14.967 hellaswag 0.5840 on 512 rows
+q2_b4 wikitext 17.552 c4 15.935 hellaswag 0.6795 on 2000 rows
+q2_b3 wikitext 25.771 c4 21.317 hellaswag 0.6145 on 2000 rows
+q3_int4 wikitext 17.280 c4 15.887 hellaswag 0.6835 on 2000 rows
+q3_int3 wikitext 24.091 c4 20.114 hellaswag 0.6155 on 2000 rows
+finished track b

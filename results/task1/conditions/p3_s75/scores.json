@@ -1,0 +1,38 @@
+{
+  "condition": "p3_s75",
+  "calib_nll": 5.0779310252568495,
+  "dev": {
+    "tokens": 16352,
+    "nll": 5.116611525503856,
+    "ppl": 166.76931755693766
+  },
+  "wikitext": {
+    "tokens": 50000,
+    "nll": 5.361657644348145,
+    "ppl": 213.07786117747918
+  },
+  "c4": {
+    "tokens": 50000,
+    "nll": 5.18103358215332,
+    "ppl": 177.8665557170348
+  },
+  "hellaswag": {
+    "rows": 512,
+    "acc": 0.29296875,
+    "acc_norm": 0.376953125
+  },
+  "eligible_zeros": 982646784,
+  "eligible_weights": 1310195712,
+  "sparsity": 0.75,
+  "effective_nonzero_fraction": 0.25,
+  "eval_seconds": 76.45352125167847,
+  "other_parameters": 233518592,
+  "dense_fp16_bytes": 3087428608,
+  "sparse_format_bytes": 1285909504,
+  "nominal_bits": 5.0,
+  "target_sparsity": 0.75,
+  "design": "measured",
+  "compress_seconds": 32.32806658744812,
+  "compress_peak_gb": 4.077050368,
+  "sensitivity_seconds": 1784.3111872673035
+}

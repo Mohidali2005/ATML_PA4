@@ -1,0 +1,36 @@
+{
+  "condition": "p2_s50",
+  "calib_nll": 2.897139398085861,
+  "dev": {
+    "tokens": 16352,
+    "nll": 2.8385771958562027,
+    "ppl": 17.09143047113701
+  },
+  "wikitext": {
+    "tokens": 50000,
+    "nll": 3.235357492160797,
+    "ppl": 25.415455981262408
+  },
+  "c4": {
+    "tokens": 50000,
+    "nll": 3.0500936479187013,
+    "ppl": 21.117321923191408
+  },
+  "hellaswag": {
+    "rows": 2000,
+    "acc": 0.424,
+    "acc_norm": 0.5785
+  },
+  "eligible_zeros": 655097856,
+  "eligible_weights": 1310195712,
+  "sparsity": 0.5,
+  "effective_nonzero_fraction": 0.5,
+  "eval_seconds": 197.49275875091553,
+  "compress_seconds": 34.3454008102417,
+  "compress_peak_gb": 4.077050368,
+  "other_parameters": 233518592,
+  "dense_fp16_bytes": 3087428608,
+  "sparse_format_bytes": 1941007360,
+  "nominal_bits": 9.0,
+  "target_sparsity": 0.5
+}

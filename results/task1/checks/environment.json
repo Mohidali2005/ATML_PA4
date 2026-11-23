@@ -1,0 +1,37 @@
+{
+  "python": "3.13.16",
+  "torch": "2.11.0+cu130",
+  "transformers": "4.57.1",
+  "cuda": "13.0",
+  "cudnn": 92700,
+  "device": "Tesla T4",
+  "capability": [
+    7,
+    5
+  ],
+  "model": "Qwen/Qwen2.5-1.5B",
+  "model_revision": "8faed761d45a263340a0528343f099c05c9a4323",
+  "dtype": "float16",
+  "attention": "sdpa",
+  "seed": 6304,
+  "tiny": false,
+  "smoke": false,
+  "source_revisions": {
+    "c4": "1588ec454efa1a09f29cd18ddd04fe05fc8653a2",
+    "wikitext": "b08601e04326c79dfdd32d625aee71d232d685c3",
+    "hellaswag": "218ec52e09a7e7462a5400043bb9a69a41d06b76",
+    "gsm8k": "740312add88f781978c0658806c59bc2815b9866",
+    "model_base": "8faed761d45a263340a0528343f099c05c9a4323",
+    "model_target": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+    "model_draft": "7ae557604adf67be50417f59c2c2f167def9a775"
+  },
+  "data_sha256": {
+    "c4_calibration": "eaa0452a7b6830b665debecc5df6960876bc7d3ad89ced339bcfc85fa4db6fe3",
+    "c4_development": "85b71a7beeaaf06ea84d99510b4414f50d3a9fc3ddee6c15c1f52c2be3d5f7e2",
+    "c4_validation_windows": "dd36c6eefb4a4f06b9606e28e5135556389ce98d9f86598a6b61fec3f292e8b5",
+    "wikitext2_test_windows": "879b5c741918fa58f5ce929e61a0ac83e4acf97d368d3a4f1b456e711fc560b3",
+    "hellaswag_val": "8686d379fe103478679199c744fa6779e4014d70f2af3941f64a3215dc677feb",
+    "gsm8k_train": "70adc54a8dd45432b2be6b4ab76aad886e4282ae2e55c50dc3119075a71f45d1",
+    "gsm8k_test": "44e2e357ee52b0da9e870e724b9bd8cf8ac25f3cf5db5fe9f01f5263ed069d7a"
+  }
+}

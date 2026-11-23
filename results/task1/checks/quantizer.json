@@ -1,0 +1,16 @@
+{
+  "formula_diff_b2": 0.0,
+  "formula_diff_b3": 0.0,
+  "formula_diff_b4": 0.0,
+  "formula_diff_b8": 0.0,
+  "roundtrip_b1": true,
+  "bytes_b1": 125,
+  "roundtrip_b2": true,
+  "bytes_b2": 250,
+  "roundtrip_b3": true,
+  "bytes_b3": 375,
+  "roundtrip_b4": true,
+  "bytes_b4": 500,
+  "roundtrip_b8": true,
+  "bytes_b8": 1000
+}

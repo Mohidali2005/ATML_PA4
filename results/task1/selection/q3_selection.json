@@ -1,0 +1,18 @@
+{
+  "3": {
+    "selected": "measured",
+    "dev_nll": {
+      "measured": 2.771617740101077,
+      "local": 3.0754741810539232
+    }
+  },
+  "4": {
+    "selected": "measured",
+    "dev_nll": {
+      "measured": 2.5723416240714534,
+      "local": 2.6986309133630444
+    }
+  },
+  "criterion": "lowest development pooled nll with ties going to the earlier candidate",
+  "written_at": "2026-11-23 18:20:25"
+}

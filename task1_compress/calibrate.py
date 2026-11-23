@@ -58,6 +58,9 @@ def walk(model,cfg,ids,before=None,originals=None):
                     # undoing the activation scale so the reference sees the original input
                     if hasattr(module,"awq_scale"):
                         x = x*module.awq_scale.to(x.dtype)
+                    # undoing the down scale folded into the up rows so both outputs share one scale
+                    if hasattr(module,"awq_out_scale"):
+                        out = out.float()*module.awq_out_scale.float()
                     ref = F.linear(x,w0,module.bias)
                     acc[n][0] += (out-ref).float().pow(2).sum().item()
                     acc[n][1] += ref.float().pow(2).sum().item()

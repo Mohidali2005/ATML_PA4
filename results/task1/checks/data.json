@@ -1,0 +1,23 @@
+{
+  "wikitext": {
+    "windows": 437,
+    "scored_tokens": 50000,
+    "documents": 436,
+    "max_length": 512
+  },
+  "c4": {
+    "windows": 177,
+    "scored_tokens": 50000,
+    "documents": 130,
+    "max_length": 512
+  },
+  "calibration": [
+    128,
+    512
+  ],
+  "development": [
+    32,
+    512
+  ],
+  "hellaswag_rows": 2000
+}

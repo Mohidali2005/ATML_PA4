@@ -56,12 +56,13 @@ def latency(model,ids,cfg,warmup,reps,decode_tokens):
     """Prefill and decode latency at batch one plus resident and peak allocated memory"""
     t = cfg["timing"]
     out = {}
-    if torch.cuda.is_available():
-        torch.cuda.empty_cache()
-        out["resident_gb"] = torch.cuda.memory_allocated()/1e9
     for length in t["prefill"]:
         x = ids[:,:length]
         out[f"prefill_{length}_ms"],out[f"prefill_{length}_std"] = timed(lambda:model(input_ids=x,logits_to_keep=1),warmup,reps)
+    if torch.cuda.is_available():
+        # reading the memory after the first calls so the matmul workspace counts the same for every model
+        torch.cuda.empty_cache()
+        out["resident_gb"] = torch.cuda.memory_allocated()/1e9
     prompt = ids[:,:t["decode_prompt"]]
     times = []
     for r in range(warmup+reps):

@@ -63,9 +63,10 @@ def pruning_walk(model,cfg,ids,levels):
     return base,probes,owl,stats_rows
 
 
-def quant_walk(model,cfg,ids,bits_list,grid):
+def quant_walk(model,cfg,ids,bits_list,grid,probe=True):
     """Walk the dense model once to search activation scales at every bit width and probe every projection
 
+    when probe is false only the scale search and the local errors are computed
     returns the dense calibration nll the scales the search rows the local errors the probe rows
     and the search time spent on each bit width"""
     names,micro = cfg["eligible"],cfg["calib"]["micro_batch"]
@@ -95,6 +96,8 @@ def quant_walk(model,cfg,ids,bits_list,grid):
                     local_rows.append({"block":i,"proj":n,"bits":b,"alpha":alpha,
                                        "rel_error":err*ref.numel()/ref.float().pow(2).sum().item()})
             timer[b] += time.time()-start
+        if not probe:
+            return
         saved = block_state(layer)
         for n in names:
             for b in bits_list:

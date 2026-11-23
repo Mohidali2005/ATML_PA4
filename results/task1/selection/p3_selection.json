@@ -1,0 +1,22 @@
+{
+  "0.5": {
+    "selected": "owl_0.08",
+    "dev_nll": {
+      "owl_0.08": 2.8208900160518877,
+      "owl_0.04": 2.8232371559814933,
+      "owl_0.12": 2.827225761637529,
+      "measured": 2.8434511061517225
+    }
+  },
+  "0.75": {
+    "selected": "measured",
+    "dev_nll": {
+      "measured": 5.116611525503856,
+      "owl_0.12": 5.310377326263607,
+      "owl_0.08": 5.682789841743364,
+      "owl_0.04": 6.330454921535783
+    }
+  },
+  "criterion": "lowest development pooled nll with ties going to the earlier candidate",
+  "written_at": "2026-11-23 16:07:57"
+}

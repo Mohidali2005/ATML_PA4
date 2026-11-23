@@ -1,0 +1,28 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1795446056.908637     209 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+WARNING:lm_eval.models.huggingface:`pretrained` model kwarg is not of type `str`. Many other model arguments may be ignored. Please do not launch via accelerate or use `parallelize=True` if passing an existing model this way.
+WARNING:lm_eval.models.huggingface:Passed an already-initialized model through `pretrained`, assuming single-process call to evaluate() or custom distributed integration
+Tokenizing inputs:   0%|          | 0/32 [00:00<?, ?it/s]Tokenizing inputs: 100%|██████████| 32/32 [00:00<00:00, 2978.31it/s]
+Running loglikelihood requests:   0%|          | 0/32 [00:00<?, ?it/s]Running loglikelihood requests:   3%|▎         | 1/32 [00:00<00:05,  6.14it/s]Running loglikelihood requests:  53%|█████▎    | 17/32 [00:00<00:00, 66.38it/s]Running loglikelihood requests: 100%|██████████| 32/32 [00:00<00:00, 91.19it/s]
+fp16 wikitext 13.616 c4 12.869 hellaswag 0.5000 on 8 rows
+p1_s50 wikitext 90.058 c4 100.804 hellaswag 0.5000 on 8 rows
+p2_s50 wikitext 25.228 c4 19.087 hellaswag 0.3750 on 8 rows
+p2_24 wikitext 47.673 c4 50.673 hellaswag 0.3750 on 8 rows
+p3_s50 wikitext 24.263 c4 18.851 hellaswag 0.3750 on 8 rows
+p3_s75 wikitext 185.653 c4 199.955 hellaswag 0.3750 on 8 rows
+q1_b4 wikitext 15.833 c4 14.617 hellaswag 0.3750 on 8 rows
+q1_b3 wikitext 38.629 c4 26.010 hellaswag 0.5000 on 8 rows
+finished track a
+q2_b4 wikitext 15.440 c4 13.618 hellaswag 0.5000 on 8 rows
+q2_b3 wikitext 25.981 c4 18.386 hellaswag 0.3750 on 8 rows
+q3_int4 wikitext 18.269 c4 15.170 hellaswag 0.5000 on 8 rows
+q3_int3 wikitext 35.503 c4 23.816 hellaswag 0.5000 on 8 rows
+finished track b
+The attention mask is not set and cannot be inferred from input because pad token is same as eos token. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+timed fp16
+timed p2_s50
+timed q2_b4
+timed q3_int3
+/kaggle/temp/ATML_PA4/task1_compress/kernel_probe.py:41: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at /pytorch/aten/src/ATen/SparseCsrTensorImpl.cpp:49.)
+  csr = ws.to_sparse_csr()
+finished final stage

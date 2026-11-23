@@ -77,6 +77,18 @@ The run script works in this order:
 
 A stage can also be run on its own with `python -m task1_compress.run_task1 --stage track_a`. Adding `--smoke --tiny` runs everything on a small random model on the CPU.
 
+The masks and scales are written outside the repository. A second commit on one T4 rebuilds them from the committed results and repeats the timing stage:
+
+```bash
+bash scripts/run_task1_rebuild_kaggle.sh /kaggle/temp/artifacts
+```
+
+- `--stage rebuild` recreates every evaluated condition. Uniform conditions are rebuilt from their rule, and P3 and Q3 from the allocation saved in `results/task1/conditions/<name>/allocation.json`. The Q2 scale search is repeated without the sensitivity probes.
+- Each rebuilt model is walked over the calibration set again. `checks/rebuild.csv` compares its calibration NLL with the one it was evaluated with, and its calibration output errors are written again.
+- `final` then times every condition. An untimed pass of the FP16 model runs first so the GPU clocks settle, and FP16 is timed again at the end (`fp16_end`) to show how far the clocks drifted over the stage.
+
+The committed calibration output errors, timing, packed execution, kernel and continuation files come from this second commit.
+
 ### Results layout
 
 `results/task1/` holds:

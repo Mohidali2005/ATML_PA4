@@ -1,0 +1,20 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1795446783.895226     272 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+WARNING:lm_eval.models.huggingface:`pretrained` model kwarg is not of type `str`. Many other model arguments may be ignored. Please do not launch via accelerate or use `parallelize=True` if passing an existing model this way.
+WARNING:lm_eval.models.huggingface:Passed an already-initialized model through `pretrained`, assuming single-process call to evaluate() or custom distributed integration
+Tokenizing inputs:   0%|          | 0/256 [00:00<?, ?it/s]Tokenizing inputs: 100%|██████████| 256/256 [00:00<00:00, 3115.51it/s]
+Running loglikelihood requests:   0%|          | 0/256 [00:00<?, ?it/s]Running loglikelihood requests:   0%|          | 1/256 [00:00<00:38,  6.54it/s]Running loglikelihood requests:   4%|▎         | 9/256 [00:00<00:06, 38.72it/s]Running loglikelihood requests:   7%|▋         | 17/256 [00:00<00:04, 51.14it/s]Running loglikelihood requests:  13%|█▎        | 33/256 [00:00<00:03, 68.09it/s]Running loglikelihood requests:  19%|█▉        | 49/256 [00:00<00:02, 76.27it/s]Running loglikelihood requests:  25%|██▌       | 65/256 [00:00<00:02, 81.01it/s]Running loglikelihood requests:  32%|███▏      | 81/256 [00:01<00:02, 84.52it/s]Running loglikelihood requests:  38%|███▊      | 97/256 [00:01<00:01, 90.73it/s]Running loglikelihood requests:  44%|████▍     | 113/256 [00:01<00:01, 96.20it/s]Running loglikelihood requests:  50%|█████     | 129/256 [00:01<00:01, 100.04it/s]Running loglikelihood requests:  57%|█████▋    | 145/256 [00:01<00:01, 104.20it/s]Running loglikelihood requests:  63%|██████▎   | 161/256 [00:01<00:00, 106.45it/s]Running loglikelihood requests:  69%|██████▉   | 177/256 [00:01<00:00, 107.59it/s]Running loglikelihood requests:  75%|███████▌  | 193/256 [00:02<00:00, 109.78it/s]Running loglikelihood requests:  82%|████████▏ | 209/256 [00:02<00:00, 117.69it/s]Running loglikelihood requests:  88%|████████▊ | 225/256 [00:02<00:00, 125.33it/s]Running loglikelihood requests:  94%|█████████▍| 241/256 [00:02<00:00, 133.32it/s]Running loglikelihood requests: 100%|██████████| 256/256 [00:02<00:00, 102.38it/s]
+fp16 wikitext 16.107 c4 14.963 hellaswag 0.6935 on 2000 rows
+p1_s25 wikitext 21.330 c4 17.986 hellaswag 0.5879 on 512 rows
+p1_s50 wikitext 127.797 c4 102.455 hellaswag 0.4000 on 2000 rows
+p1_s75 wikitext 1600856.311 c4 1218402.640 hellaswag 0.2793 on 512 rows
+p2_s25 wikitext 16.542 c4 15.385 hellaswag 0.5957 on 512 rows
+p2_s50 wikitext 25.415 c4 21.117 hellaswag 0.5785 on 2000 rows
+p2_s75 wikitext 2954.383 c4 1440.682 hellaswag 0.3008 on 512 rows
+p2_24 wikitext 67.192 c4 51.172 hellaswag 0.4355 on 512 rows
+p3_s50 wikitext 24.608 c4 20.625 hellaswag 0.5740 on 2000 rows
+p3_s75 wikitext 213.078 c4 177.867 hellaswag 0.3770 on 512 rows
+q1_b8 wikitext 16.085 c4 14.968 hellaswag 0.5859 on 512 rows
+q1_b4 wikitext 18.896 c4 16.729 hellaswag 0.6705 on 2000 rows
+q1_b3 wikitext 40.537 c4 30.572 hellaswag 0.5625 on 2000 rows
+finished track a

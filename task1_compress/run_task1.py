@@ -167,6 +167,14 @@ def numels(run):
     return keys,[run.originals[k].numel() for k in keys]
 
 
+def block_totals(run,block_s,target):
+    """Exact number of removed weights per projection for one sparsity per block"""
+    keys,sizes = numels(run)
+    per_block = len(run.cfg["eligible"])
+    unit = [block_s[k//per_block] for k in range(len(keys))]
+    return dict(zip(keys,projection_totals(unit,sizes,round(target*sum(sizes)))))
+
+
 def environment(run):
     """Record the software hardware data and model versions used"""
     cfg = run.cfg
@@ -287,8 +295,6 @@ def adaptive_pruning(run):
     ratios = pd.read_csv(sens/"owl_ratios.csv").sort_values("block")["outlier_ratio"].tolist()
     blocks = sorted(probes["block"].unique())
     grid = np.round(np.arange(p["min"],p["max"]+1e-9,p["grid_step"]),4)
-    keys,sizes = numels(run)
-    per_block = len(cfg["eligible"])
     dev_rows,candidates = [],{}
     for target in p["targets"]:
         curves = [interpolate(p["probe_levels"],probes[probes["block"] == b].sort_values("sparsity")["delta"].values,grid)
@@ -304,8 +310,7 @@ def adaptive_pruning(run):
             candidates[(target,design)] = key
             if not (art/"dev.json").exists():
                 model = run.fresh()
-                unit = [block_s[k//per_block] for k in range(len(keys))]
-                totals = dict(zip(keys,projection_totals(unit,sizes,round(target*sum(sizes)))))
+                totals = block_totals(run,block_s,target)
                 start = begin()
                 masks = wanda(run,model,totals)
                 info = finish(start)
@@ -499,6 +504,73 @@ def track_b(run):
     print("finished track b",flush=True)
 
 
+def rebuild_all(run):
+    """Recreate the saved form of every evaluated condition from its stored rule or allocation
+
+    every rebuilt model is walked over the calibration set again so its nll can be compared
+    with the evaluated one and its calibration output errors are written again"""
+    cfg = run.cfg
+    cond = run.results/"conditions"
+    rows = []
+
+    def store(name,model,masks=None,quant=None):
+        """Save what the timing stage needs and compare the rebuilt model with the evaluated one"""
+        art = run.artifacts/name
+        art.mkdir(parents=True,exist_ok=True)
+        if masks is not None:
+            torch.save(masks,art/"masks.pt")
+        if quant is not None:
+            torch.save(quant,art/"quant.pt")
+        save_json(art/"fingerprint.json",fingerprint(model,cfg))
+        nll,errors = walk(model,cfg,run.calib,originals=run.originals)
+        both = pd.read_csv(cond/name/"calib_errors.csv").merge(pd.DataFrame(errors),on=["block","proj"],
+                                                                suffixes=("_old","_new"))
+        gap = (both["rel_error_old"]-both["rel_error_new"]).abs()
+        up = both["proj"] == "up_proj"
+        rows.append({"condition":name,"calib_nll_evaluated":load_json(cond/name/"scores.json")["calib_nll"],
+                     "calib_nll_rebuilt":nll,"max_error_change_up":gap[up].max(),"max_error_change_rest":gap[~up].max()})
+        to_csv(errors,cond/name/"calib_errors.csv")
+        print("rebuilt",name,flush=True)
+
+    store("fp16",run.fresh())
+    for s in cfg["prune"]["sparsities"]:
+        model = run.fresh()
+        store(f"p1_s{round(100*s)}",model,masks=magnitude(model,cfg,s))
+        model = run.fresh()
+        store(f"p2_s{round(100*s)}",model,masks=wanda(run,model,uniform_totals(run,s)))
+    model = run.fresh()
+    store("p2_24",model,masks=wanda(run,model,two_four=True))
+    for target in cfg["p3"]["targets"]:
+        name = f"p3_s{round(100*target)}"
+        model = run.fresh()
+        totals = block_totals(run,load_json(cond/name/"allocation.json")["block_sparsity"],target)
+        store(name,model,masks=wanda(run,model,totals))
+    for b in cfg["quant"]["bits"]:
+        model = run.fresh()
+        bits = uniform_bits(run,b)
+        quantize_model(model,cfg,bits,None)
+        store(f"q1_b{b}",model,quant={"bits":bits,"scales":None})
+    del model
+    model = run.fresh()
+    _,scales,_,_,_,_ = quant_walk(model,cfg,run.calib,cfg["q3"]["bits"],run.grid,probe=False)
+    for b in cfg["quant"]["bits"]:
+        chosen = {(i,g):scales[(i,g,bb)].float() for (i,g,bb) in scales if bb == b}
+        model = run.fresh()
+        bits = uniform_bits(run,b)
+        quantize_model(model,cfg,bits,chosen)
+        store(f"q2_b{b}",model,quant={"bits":bits,"scales":chosen})
+    for budget in cfg["q3"]["budgets"]:
+        name = f"q3_int{budget}"
+        bits = {(int(k.split(".")[0]),k.split(".")[1]):b for k,b in load_json(cond/name/"allocation.json")["bits"].items()}
+        model = run.fresh()
+        mixed = {k:v.float() for k,v in mixed_scales(model,cfg,run.calib,bits,scales,run.grid).items()}
+        model = run.fresh()
+        quantize_model(model,cfg,bits,mixed)
+        store(name,model,quant={"bits":bits,"scales":mixed})
+    to_csv(rows,run.results/"checks"/"rebuild.csv")
+    print("finished rebuild",flush=True)
+
+
 def rebuild(run,name):
     """Rebuild a saved condition in a fresh model and confirm it matches the evaluated weights"""
     model = run.fresh()
@@ -543,10 +615,14 @@ def final(run):
         names = [n for n in names if n in ("fp16","p2_s50","q2_b4","q3_int3")]
     out = run.results/"resources"
     timing,packed,texts = [],[],[]
+    warmup = t["warmup"] if not run.smoke else 1
+    # running the unchanged model once untimed so the gpu clocks settle before the first measured condition
+    model,_ = rebuild(run,"fp16")
+    latency(model,run.time_ids,cfg,warmup,run.reps,t["decode_tokens"])
+    del model
     for name in names:
         model,saved = rebuild(run,name)
-        timing.append({"condition":name,**latency(model,run.time_ids,cfg,t["warmup"] if not run.smoke else 1,
-                                                  run.reps,t["decode_tokens"])})
+        timing.append({"condition":name,**latency(model,run.time_ids,cfg,warmup,run.reps,t["decode_tokens"])})
         if name in cfg["qualitative"]["continuation_models"]:
             for prompt in cfg["qualitative"]["prompts"]:
                 ids = run.tok(prompt,return_tensors="pt").input_ids.to(device())
@@ -563,8 +639,10 @@ def final(run):
                         for g in GROUPS:
                             apply_scale(layer,g,saved["scales"][(i,g)])
             model = packed_model(run,model,saved)
-            new = model(input_ids=run.calib[:1]).logits.float()
-            packed.append({"condition":name,"max_abs_logit_diff":(ref-new).abs().max().item(),
+            diff = (ref-model(input_ids=run.calib[:1]).logits.float()).abs().max().item()
+            # freeing the reference logits so the packed memory reading holds only the model
+            del ref
+            packed.append({"condition":name,"max_abs_logit_diff":diff,
                            **latency(model,run.time_ids,cfg,t["packed_warmup"],t["packed_reps"] if not run.smoke else 2,
                                      t["packed_decode_tokens"]),
                            "file_bytes":file_bytes(packed_tensors(model),run.artifacts/"packed.safetensors")})
@@ -575,6 +653,10 @@ def final(run):
         if torch.cuda.is_available():
             torch.cuda.empty_cache()
         print("timed",name,flush=True)
+    # timing the unchanged model again at the end to show how far the gpu clocks drifted over the stage
+    model,_ = rebuild(run,"fp16")
+    timing.append({"condition":"fp16_end",**latency(model,run.time_ids,cfg,warmup,run.reps,t["decode_tokens"])})
+    del model
     to_csv(timing,out/"timing.csv")
     to_csv(packed,out/"packed_execution.csv")
     save_json(run.results/"qualitative"/"continuations.json",texts)
@@ -586,7 +668,7 @@ def final(run):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--config",default="configs/task1.yaml")
-    ap.add_argument("--stage",choices=["track_a","track_b","final","all"],required=True)
+    ap.add_argument("--stage",choices=["track_a","track_b","final","all","rebuild"],required=True)
     ap.add_argument("--smoke",action="store_true")
     ap.add_argument("--tiny",action="store_true")
     ap.add_argument("--artifacts")
@@ -601,6 +683,8 @@ def main():
         track_a(run)
     if args.stage in ("track_b","all"):
         track_b(run)
+    if args.stage == "rebuild":
+        rebuild_all(run)
     if args.stage in ("final","all"):
         final(run)
 

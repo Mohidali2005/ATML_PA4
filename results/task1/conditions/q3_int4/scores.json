@@ -1,0 +1,40 @@
+{
+  "condition": "q3_int4",
+  "calib_nll": 2.661437868838674,
+  "dev": {
+    "tokens": 16352,
+    "nll": 2.5723416240714534,
+    "ppl": 13.096455539221
+  },
+  "wikitext": {
+    "tokens": 50000,
+    "nll": 2.8495686446762085,
+    "ppl": 17.280326271949377
+  },
+  "c4": {
+    "tokens": 50000,
+    "nll": 2.7654817781829832,
+    "ppl": 15.886692008787707
+  },
+  "hellaswag": {
+    "rows": 2000,
+    "acc": 0.4975,
+    "acc_norm": 0.6835
+  },
+  "eligible_zeros": 218311583,
+  "eligible_weights": 1310195712,
+  "sparsity": 0.16662516981279818,
+  "effective_nonzero_fraction": 0.8333748301872018,
+  "eval_seconds": 241.72888088226318,
+  "other_parameters": 233518592,
+  "dense_fp16_bytes": 3087428608,
+  "packed_bytes": 1152928768,
+  "o_scale_bytes": 86016,
+  "nominal_bits": 4.1875,
+  "budget_bits": 4,
+  "design": "measured",
+  "compress_seconds": 191.91646790504456,
+  "compress_peak_gb": 6.252025344,
+  "probe_seconds": 8137.5016832351685,
+  "walk_seconds": 9774.908699989319
+}

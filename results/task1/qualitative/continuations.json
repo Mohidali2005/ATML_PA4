@@ -1,0 +1,52 @@
+[
+  {
+    "condition": "fp16",
+    "prompt": "The capital of France is Paris, and the capital of Japan is",
+    "continuation": " Tokyo. The capital of France is in the ___ of the capital of Japan.\nA. East\nB. West\nC. South\nD. North\n"
+  },
+  {
+    "condition": "fp16",
+    "prompt": "To make a cup of tea, first boil the water, then",
+    "continuation": " add the tea leaves, and finally pour it into the cup. The correct order of operations is ____\nA. Add tea leaves, boil water, pour into"
+  },
+  {
+    "condition": "p2_s75",
+    "prompt": "The capital of France is Paris, and the capital of Japan is",
+    "continuation": " the capital of the capital of the capital of the capital of the capital of the capital of the capital of the capital of the capital of the capital of the capital"
+  },
+  {
+    "condition": "p2_s75",
+    "prompt": "To make a cup of tea, first boil the water, then",
+    "continuation": ", the.\nThe.\nThe.\nThe. The. The. The. The. The. The. The. The. The. The. The. The"
+  },
+  {
+    "condition": "p3_s75",
+    "prompt": "The capital of France is Paris, and the capital of Japan is",
+    "continuation": " the capital of the capital of France. The capital of France is the capital of the capital of France. The capital of France is the capital of France. The"
+  },
+  {
+    "condition": "p3_s75",
+    "prompt": "To make a cup of tea, first boil the water, then",
+    "continuation": " the water is the water of the tea. The tea is the tea of the tea. The tea is the tea of the tea. The tea is the tea"
+  },
+  {
+    "condition": "q2_b3",
+    "prompt": "The capital of France is Paris, and the capital of Japan is",
+    "continuation": " Tokyo. The capital of France is also the capital of which country?\nThe answer is France. The capital of France is Paris, and the capital of Japan is"
+  },
+  {
+    "condition": "q2_b3",
+    "prompt": "To make a cup of tea, first boil the water, then",
+    "continuation": " add the tea, and finally heat the mug. Which of the following is the correct order of operations?\nA. ①②③\nB"
+  },
+  {
+    "condition": "q3_int3",
+    "prompt": "The capital of France is Paris, and the capital of Japan is",
+    "continuation": " Tokyo. The capital of the United States is Washington, D.C. The capital of the United States is a city, not a country. The capital of the"
+  },
+  {
+    "condition": "q3_int3",
+    "prompt": "To make a cup of tea, first boil the water, then",
+    "continuation": " boil the tea, then infuse the tea, then cool the tea, then filter the tea, then serve the tea. The time required for each step is"
+  }
+]

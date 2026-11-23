@@ -1,0 +1,9 @@
+{
+  "eligible_modules": 196,
+  "eligible_weights": 1310195712,
+  "expected_eligible_weights": 1310195712,
+  "tied_head": true,
+  "unique_parameters": 1543714304,
+  "other_parameters": 233518592,
+  "head_in_eligible": false
+}

@@ -1,0 +1,6 @@
+{
+  "preprocess_identical": true,
+  "rows": 64,
+  "max_abs_ll_diff": 0.097808837890625,
+  "same_raw_pick": true
+}

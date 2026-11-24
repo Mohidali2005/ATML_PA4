@@ -1,0 +1,21 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1795470328.807795     210 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+rebuilt fp16
+rebuilt p1_s25
+rebuilt p2_s25
+rebuilt p1_s50
+rebuilt p2_s50
+rebuilt p1_s75
+rebuilt p2_s75
+rebuilt p2_24
+rebuilt p3_s50
+rebuilt p3_s75
+rebuilt q1_b8
+rebuilt q1_b4
+rebuilt q1_b3
+rebuilt q2_b8
+rebuilt q2_b4
+rebuilt q2_b3
+rebuilt q3_int4
+rebuilt q3_int3
+finished rebuild

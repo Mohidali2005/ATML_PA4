@@ -1,0 +1,5 @@
+adaptive,uniform,quantity,adaptive_value,uniform_value,within_budget,equal
+p3_s50,p2_s50,eligible_zeros,655097856,655097856,True,True
+p3_s75,p2_s75,eligible_zeros,982646784,982646784,True,True
+q3_int4,q2_b4,packed_bytes,1152928768,1152928768,True,True
+q3_int3,q2_b3,packed_bytes,989154304,989154304,True,True

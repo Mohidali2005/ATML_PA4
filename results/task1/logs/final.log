@@ -1,5 +1,5 @@
 WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
-I0000 00:00:1795458577.763196     313 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+I0000 00:00:1795473379.243861     274 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
 The attention mask is not set and cannot be inferred from input because pad token is same as eos token. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
 timed fp16
 timed p1_s25

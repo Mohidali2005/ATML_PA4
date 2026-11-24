@@ -1,0 +1,176 @@
+[
+  {
+    "order": 0,
+    "query": "Clean and jerk: A lady walks to a barbell. She bends down and grabs the pole. The lady",
+    "endings": [
+      "swings and lands in her arms.",
+      "pulls the barbell forward.",
+      "pulls a rope attached to the barbell.",
+      "stands and lifts the weight over her head."
+    ],
+    "gold": 3,
+    "models": {
+      "fp16": {
+        "pick": 3,
+        "ll_per_char": [
+          -0.9853473531788793,
+          -0.5043270404522235,
+          -0.4689679532437711,
+          -0.34928462618873235
+        ]
+      },
+      "p2_s50": {
+        "pick": 2,
+        "ll_per_char": [
+          -0.8357860302102978,
+          -0.4535927405724159,
+          -0.3848273045307881,
+          -0.5203313373384022
+        ]
+      },
+      "p3_s50": {
+        "pick": 2,
+        "ll_per_char": [
+          -0.848855314583614,
+          -0.4570490030141977,
+          -0.45519225661819046,
+          -0.48691277276901973
+        ]
+      },
+      "q2_b3": {
+        "pick": 3,
+        "ll_per_char": [
+          -0.8907557520373114,
+          -0.4729578678424542,
+          -0.4273987847405511,
+          -0.4246289389474051
+        ]
+      },
+      "q3_int3": {
+        "pick": 3,
+        "ll_per_char": [
+          -0.9061685759445716,
+          -0.5370440849891076,
+          -0.46759858002533783,
+          -0.4351541428338915
+        ]
+      }
+    }
+  },
+  {
+    "order": 16,
+    "query": "Clean and jerk: A man in a blue shirt and shorts lifts a large weight over his head. Another man is filming it. The same man comes back and lifts the weight over his head again. He",
+    "endings": [
+      "drops it on the ground and walks away.",
+      "again lifts the weight over his head.",
+      "drops it and runs towards the camera.",
+      "drops it onto the floor where it gets stuck."
+    ],
+    "gold": 0,
+    "models": {
+      "fp16": {
+        "pick": 0,
+        "ll_per_char": [
+          -0.3198475084806743,
+          -0.3532950169331319,
+          -0.45035985998205236,
+          -0.609922322359952
+        ]
+      },
+      "p2_s50": {
+        "pick": 1,
+        "ll_per_char": [
+          -0.39339710536756006,
+          -0.2766157614218222,
+          -0.4943450721534522,
+          -0.6906336437572133
+        ]
+      },
+      "p3_s50": {
+        "pick": 1,
+        "ll_per_char": [
+          -0.40291921715987356,
+          -0.2815016153696421,
+          -0.5024881105165224,
+          -0.6825157078829678
+        ]
+      },
+      "q2_b3": {
+        "pick": 1,
+        "ll_per_char": [
+          -0.43520084180329976,
+          -0.3823657164702544,
+          -0.5620846103977514,
+          -0.7138301675969904
+        ]
+      },
+      "q3_int3": {
+        "pick": 1,
+        "ll_per_char": [
+          -0.43212463981226873,
+          -0.34789219418087525,
+          -0.5178635055954391,
+          -0.6969903599132191
+        ]
+      }
+    }
+  },
+  {
+    "order": 3,
+    "query": "Sharpening knives: He then takes the knife and sharpens it against the wood piece. He then notices a little black and green poisonous frog sitting next to him. The frog",
+    "endings": [
+      "eventually gets to get up and marches out of the room waving its body about.",
+      "then starts to get up from the chair and begins walking towards the camera.",
+      "then escapes and jumps away.",
+      "is acting crazy and attacking him while he is cooking."
+    ],
+    "gold": 2,
+    "models": {
+      "fp16": {
+        "pick": 1,
+        "ll_per_char": [
+          -0.8062196028859991,
+          -0.5630572001139323,
+          -0.6567327635628838,
+          -0.7132660194679543
+        ]
+      },
+      "p2_s50": {
+        "pick": 2,
+        "ll_per_char": [
+          -0.8683148434287623,
+          -0.632464345296224,
+          -0.6240118571690151,
+          -0.6797172405101635
+        ]
+      },
+      "p3_s50": {
+        "pick": 1,
+        "ll_per_char": [
+          -0.8490038420024671,
+          -0.5971390787760417,
+          -0.6698143141610282,
+          -0.694016491925275
+        ]
+      },
+      "q2_b3": {
+        "pick": 1,
+        "ll_per_char": [
+          -0.9999673742997018,
+          -0.6637870279947916,
+          -0.7428577968052456,
+          -0.790581950434932
+        ]
+      },
+      "q3_int3": {
+        "pick": 1,
+        "ll_per_char": [
+          -0.9074711046720806,
+          -0.5693654378255208,
+          -0.6730522428240094,
+          -0.7538242340087891
+        ]
+      }
+    }
+  }
+]

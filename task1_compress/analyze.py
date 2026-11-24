@@ -335,6 +335,9 @@ def main():
         r["storage_vs_fp16"] = r["storage_gb"]/(scores["fp16"]["dense_fp16_bytes"]/1e9)
         r["compress_seconds"] = r["condition"].map(lambda n:scores[n].get("compress_seconds"))
         r["compress_peak_gb"] = r["condition"].map(lambda n:scores[n].get("compress_peak_gb"))
+        # adding the one time search or probe walk that the build step above reuses
+        r["search_seconds"] = r["condition"].map(lambda n:scores[n].get("sensitivity_seconds",
+                                                 scores[n].get("search_seconds",scores[n].get("walk_seconds"))))
         r.to_csv(tables/"resources.csv",index=False)
         if "fp16_end" in set(t["condition"]):
             drift = t.set_index("condition").loc[["fp16","fp16_end"],["prefill_512_ms","prefill_2048_ms","decode_ms_per_token"]]

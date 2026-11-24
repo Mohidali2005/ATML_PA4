@@ -130,6 +130,13 @@ Every time and memory measurement runs in its own process, so an out of memory e
   - At the end, every model is tested on all 9,216 frozen test sequences (every K and regime), with accuracy also split into distance bins.
   - The dense models are evaluated a second time with the 64-position window imposed at test time only.
 - **Resource costs:** a forward-only sweep on random input embeddings measures time and memory at lengths 256 to 8192.
+- **Controlled intervention (B3):** chosen after the first run's results.
+  - In each block, two heads use an exact 16-position causal window and two heads use ELU+1 linear attention. The parameters are identical to every other run.
+  - The window of 16 is the largest that keeps the per-layer decode state, 4,160 floats, within that of the linear comparator, 4,224 floats.
+  - It is trained at K = 16 on mixed data for the same three seeds and 4,500 updates.
+  - The prediction, written into `configs/task2.yaml` before training, is that it learns earlier and in every seed than linear attention, while its final accuracy may stay at or below the comparator's.
+  - It runs in a second commit with `bash scripts/run_task2_b3_kaggle.sh`. That commit also times every mechanism again, so the resource sweep is one consistent measurement.
+  - The same commit runs `python -m task2_attention.kv_eval --diagnostics`. It writes per-layer channel outlier ratios and INT4 reconstruction errors of keys and values for six fixed prompts.
 
 ### Part C: KV cache memory of Qwen2.5-1.5B-Instruct
 

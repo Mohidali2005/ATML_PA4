@@ -9,9 +9,9 @@ from common.utils import load_json,load_yaml,repo_path
 IMPL_COLOR = {"dense":"steelblue","tiled":"darkorange","sdpa":"seagreen","sdpa_efficient":"firebrick","sdpa_math":"mediumpurple"}
 IMPL_LABEL = {"dense":"dense explicit","tiled":"tiled online softmax","sdpa":"SDPA default","sdpa_efficient":"SDPA efficient",
               "sdpa_math":"SDPA math"}
-MECH_COLOR = {"dense":"steelblue","window":"darkorange","dilated":"seagreen","linear":"firebrick","intervention":"mediumpurple"}
+MECH_COLOR = {"dense":"steelblue","window":"darkorange","dilated":"seagreen","linear":"firebrick","local_linear":"mediumpurple"}
 MECH_LABEL = {"dense":"dense","window":"window 64","dilated":"local and dilated","linear":"linear ELU+1",
-              "intervention":"intervention"}
+              "local_linear":"window 16 and linear"}
 METHOD_COLOR = {"fp16":"black","sink_recent":"steelblue","question_aware":"darkorange","int4_token":"seagreen",
                 "int4_channel":"firebrick","hybrid":"mediumpurple"}
 METHOD_LABEL = {"fp16":"FP16 full cache","sink_recent":"sink and recent","question_aware":"question aware",
@@ -365,6 +365,30 @@ def kv_part(res,cfg,figs,tables):
             ax.set_ylabel("layer and key value head")
         fig.tight_layout()
         fig.savefig(figs/"kv_selection.png",dpi=200,bbox_inches="tight")
+        plt.close(fig)
+    if (res/"kv"/"key_stats.csv").exists():
+        ks = pd.read_csv(res/"kv"/"key_stats.csv")
+        layer = ks.groupby("layer")[["k_channel_max_over_median","v_channel_max_over_median","k_abs_max","v_abs_max",
+                                     "k_error_token","k_error_channel","v_error_token"]].mean()
+        layer.to_csv(tables/"kv_key_stats_by_layer.csv")
+        fig,axes = plt.subplots(1,2,figsize=(11,3.8))
+        axes[0].plot(layer.index,layer["k_channel_max_over_median"],marker="o",color="firebrick",label="keys")
+        axes[0].plot(layer.index,layer["v_channel_max_over_median"],marker="o",color="seagreen",label="values")
+        axes[0].set_yscale("log")
+        axes[0].set_ylabel("largest over median channel magnitude")
+        axes[0].set_title("(a) channel outliers per layer",fontsize=10)
+        for col,color,label in (("k_error_token","seagreen","keys, token wise groups"),
+                                ("k_error_channel","firebrick","keys, channel wise groups"),
+                                ("v_error_token","gray","values, token wise groups")):
+            axes[1].plot(layer.index,layer[col],marker="o",color=color,label=label)
+        axes[1].set_yscale("log")
+        axes[1].set_ylabel("relative INT4 reconstruction error")
+        axes[1].set_title("(b) INT4 error per layer",fontsize=10)
+        for ax in axes:
+            ax.set_xlabel("layer")
+            ax.legend(loc="upper center",bbox_to_anchor=(0.5,-0.18),ncol=3,frameon=False,fontsize=8)
+        fig.tight_layout()
+        fig.savefig(figs/"kv_key_stats.png",dpi=200,bbox_inches="tight")
         plt.close(fig)
     bench = pd.read_csv(res/"kv"/"bench.csv")
     bench.to_csv(tables/"kv_bench.csv",index=False)

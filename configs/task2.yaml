@@ -71,6 +71,25 @@ mqar:
     - {name: linear_mixed_k16,mechanism: linear,regime: mixed,k: 16}
     - {name: dilated_mixed_k4,mechanism: dilated,regime: mixed,k: 4}
     - {name: dilated_mixed_k16,mechanism: dilated,regime: mixed,k: 16}
+    - {name: local_linear_mixed_k16,mechanism: local_linear,regime: mixed,k: 16}
+  # controlled intervention chosen after the dense window linear and dilated results and fixed before it was trained
+  intervention:
+    mechanism: local_linear
+    comparator: linear_mixed_k16
+    # half of the heads use an exact causal window and half use elu plus one linear attention
+    local_heads: 2
+    window: 16
+    # the window is the largest one whose decode state per layer stays within the linear comparator
+    # linear comparator 4 heads x (32 x 32 + 32) = 4224 floats and this model 2 x 1056 + 2 x 16 x 2 x 32 = 4160 floats
+    state_floats: 4160
+    comparator_state_floats: 4224
+    selection: no hyperparameter is tuned and the update 4500 checkpoint is reported like every other run
+    prediction: >-
+      the window heads can pair each value with the key one position before it exactly which the linear
+      heads otherwise have to learn through a shared state so learning should start earlier and in every seed
+      with development mixed accuracy above 0.5 by update 2000 in all three seeds against about 0.07 for the
+      linear comparator and final mixed accuracy of at least 0.9 in every seed while retrieval itself rests on
+      half of the comparator linear state so the final accuracy may stay at or slightly below its 0.96
   # dense models that also get the window mask imposed at test time only
   test_window_runs: [dense_mixed_k4,dense_mixed_k8,dense_mixed_k16,dense_near_k16]
   sweep:
@@ -98,6 +117,8 @@ kv:
   bootstrap: 10000
   # aligned qualitative cases chosen by rule before any result
   qualitative: {target_tokens: 4096,distractors: 8,case: 0}
+  # key and value channel statistics on the first case without distractors of every length and position
+  diagnostics: {distractors: 0,case: 0}
   bench:
     batches: [1,8]
     lengths: [2048,4096]

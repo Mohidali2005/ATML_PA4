@@ -45,6 +45,12 @@ class Attention(nn.Module):
         q,k,v = self.qkv(x).view(b,t,3,self.heads,d//self.heads).permute(2,0,3,1,4)
         if self.mechanism == "linear":
             o = linear_attention(q,k,v)
+        elif self.mechanism == "local_linear":
+            # the first heads attend exactly inside a short window and the rest keep a linear state
+            n = self.mq["intervention"]["local_heads"]
+            local = window_mask(t,self.mq["intervention"]["window"],x.device)
+            o = torch.cat([dense_attention(q[:,:n],k[:,:n],v[:,:n],causal=True,mask=local),
+                           linear_attention(q[:,n:],k[:,n:],v[:,n:])],1)
         else:
             o = dense_attention(q,k,v,causal=True,mask=self.mask(t,x.device,test_window))
         return self.out(o.transpose(1,2).reshape(b,t,d))

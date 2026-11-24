@@ -187,6 +187,15 @@ def theory(cfg):
     rows.append({"mechanism":"linear","pairs_per_layer":None,"mean_positions_per_query":None,
                  "max_offset_one_layer":t-1,"max_offset_two_layers":t-1,"far_offsets_reachable_two_layers":1.0,
                  "decode_state_floats_per_layer":heads*(hd*hd+hd),"decode_state_bytes_fp32":4*heads*(hd*hd+hd)})
+    iv = mq["intervention"]
+    n,w = iv["local_heads"],iv["window"]
+    floats = n*2*w*hd+(heads-n)*(hd*hd+hd)
+    # only the window heads score explicit pairs while the linear heads read every earlier position through their state
+    rows.append({"mechanism":"local_linear","pairs_per_layer":n*int(window_mask(t,w,"cpu").sum()),
+                 "mean_positions_per_query":int(window_mask(t,w,"cpu").sum())/t,"max_offset_one_layer":t-1,
+                 "max_offset_two_layers":t-1,"far_offsets_reachable_two_layers":1.0,
+                 "decode_state_floats_per_layer":floats,"decode_state_bytes_fp32":4*floats})
+    assert floats == iv["state_floats"] and floats <= iv["comparator_state_floats"]
     return pd.DataFrame(rows)
 
 
@@ -204,9 +213,10 @@ def sweep(cfg,mechanisms,lengths,smoke):
             heads = mq["model"]["heads"]
             need = 4*sw["batch"]*heads*t*t*4/1e9 if mech != "linear" else 3*sw["batch"]*heads*t*(mq["model"]["dim"]//heads)**2*4/1e9
             free = torch.cuda.mem_get_info()[0]/1e9 if torch.cuda.is_available() else 1e9
+            label = {"linear":"materialized prefix state","dense":"dense scores with a causal mask",
+                     "local_linear":"dense scores with a dense boolean mask for the window heads and a materialized prefix state for the rest"}
             row = {"mechanism":mech,"length":t,"batch":sw["batch"],"reps":reps,"estimated_gb":need,
-                   "implementation":"materialized prefix state" if mech == "linear" else
-                   ("dense scores with a dense boolean mask" if mech != "dense" else "dense scores with a causal mask")}
+                   "implementation":label.get(mech,"dense scores with a dense boolean mask")}
             if need > free-1.0:
                 rows.append({**row,"status":"skipped over the free memory"})
                 continue
@@ -246,7 +256,7 @@ def main():
                 print("finished",run["name"],"seed",seed)
     if args.stage in ("sweep","all"):
         theory(cfg).to_csv(res/"recall"/"theory.csv",index=False)
-        mechs = sorted({r["mechanism"] for r in runs},key=["dense","window","dilated","linear"].index)
+        mechs = sorted({r["mechanism"] for r in runs},key=["dense","window","dilated","linear","local_linear"].index)
         lengths = cfg["smoke"]["sweep_lengths"] if args.smoke else mq["sweep"]["lengths"]
         sweep(cfg,mechs,lengths,args.smoke).to_csv(res/"recall"/"sweep.csv",index=False)
         print("mqar resource sweep written")

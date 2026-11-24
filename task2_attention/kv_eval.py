@@ -233,6 +233,36 @@ def validate(model,tok,cfg,case,shape):
 
 
 @torch.inference_mode()
+def diagnostics(model,tok,cfg,case_rows):
+    """Per layer channel outlier ratio and four bit reconstruction error of keys and values under both layouts"""
+    kv_cfg = cfg["kv"]
+    pick = kv_cfg["diagnostics"]
+    group,bits = kv_cfg["group"],kv_cfg["bits"]
+    rows = []
+    for case in case_rows:
+        if case["distractors"] != pick["distractors"] or not case["id"].endswith(f"-{pick['case']:02d}"):
+            continue
+        p = build_prompt(tok,case,kv_cfg["question_marker"])
+        c = p["split"]//group*group
+        kv = prefill(model,torch.tensor([p["ids"][:p["split"]]],device=model.device))
+        for i,(k,v) in enumerate(kv):
+            k,v = k[...,:c,:],v[...,:c,:]
+            row = {"id":case["id"],"target_tokens":case["target_tokens"],"position":case["position"],"layer":i}
+            for name,x in (("k",k),("v",v)):
+                # averaging the magnitude of every channel over tokens then comparing the largest with the typical one
+                mag = x.float().abs().mean(-2)
+                row[f"{name}_channel_max_over_median"] = float((mag.amax(-1)/mag.median(-1).values).mean())
+                row[f"{name}_abs_max"] = float(x.float().abs().max())
+            for axis in ("token","channel"):
+                rk = store(k,bits,group,axis)[0]
+                row[f"k_error_{axis}"] = float((rk.float()-k.float()).norm()/k.float().norm())
+            rv = store(v,bits,group,"token")[0]
+            row["v_error_token"] = float((rv.float()-v.float()).norm()/v.float().norm())
+            rows.append(row)
+    return pd.DataFrame(rows)
+
+
+@torch.inference_mode()
 def bench(model,cfg,case_rows,tok,shape,smoke):
     """Packing unpacking and decode step time of quantized caches against fp16 at fixed shapes"""
     b = cfg["kv"]["bench"]
@@ -297,6 +327,7 @@ def main():
     ap.add_argument("--smoke",action="store_true")
     ap.add_argument("--tiny",action="store_true")
     ap.add_argument("--results",default=None)
+    ap.add_argument("--diagnostics",action="store_true")
     args = ap.parse_args()
     cfg = load_yaml(args.config)
     set_seed(cfg["seed"])
@@ -305,6 +336,10 @@ def main():
     tok,model,rev = load(cfg,args.tiny)
     shape = shape_of(model)
     rows_all = cases(cfg)
+    if args.diagnostics:
+        diagnostics(model,tok,cfg,rows_all).to_csv(out/"key_stats.csv",index=False)
+        print("key and value channel statistics written")
+        return
     chosen = rows_all[:cfg["smoke"]["kv_cases"]] if args.smoke else rows_all
     checks = [validate(model,tok,cfg,next(x for x in rows_all if x["target_tokens"] == t),shape)
               for t in sorted({x["target_tokens"] for x in rows_all})[:1 if args.smoke else None]]

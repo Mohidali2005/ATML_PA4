@@ -99,7 +99,84 @@ The committed calibration output errors, timing, packed execution, kernel and co
 - `checks/`: environment, data, structure, numerical and harness checks
 - `tables/`, `figures/` and `qualitative/`: built by `analyze.py`
 
+## Task 2: Attention and context memory
+
+All code is in `task2_attention/` and every setting is in `configs/task2.yaml`. The frozen MQAR development and test files and the 180 retrieval prompts come from the course data repository at the same fixed commit. `python -m task2_attention.mqar --verify` checks their records against `configs/data_lock/task2_sha256.json`.
+
+### Part A: exact attention
+
+Random queries, keys and values are drawn with B = 2, H = 4 and head dimension 64, at lengths 256 to 8192, in FP16 and FP32.
+- **Dense** builds the full score table, applies the causal mask and uses a max-subtracted softmax.
+- **Tiled** visits blocks of 128 queries and 128 keys. It skips blocks that lie entirely in the future and keeps a running max, sum and output in FP32. Its backward pass is plain autograd through the loop, which stores every visited tile. It is a reference implementation, not a fused kernel.
+- **SDPA** is measured with the default dispatch and with each backend forced. Support is queried with `torch.backends.cuda.can_use_*`, and the kernels launched by the default dispatch are recorded with the profiler.
+
+Every time and memory measurement runs in its own process, so an out of memory error is recorded as a result instead of stopping the run. Errors are relative to dense FP32. Outputs are compared at every length; gradients are compared up to length 4096.
+
+### Part B: multi query associative recall
+
+- **Model:** two pre-norm blocks, hidden size 128, four heads of 32, a 4x MLP, learned token embeddings plus sinusoidal positions, and a 64-way value classifier read at the query positions. Only the attention operator differs between runs, and every model has 437,824 parameters.
+- **Training:** AdamW with peak learning rate 8e-4, weight decay 0.01 on matrices, 200 warmup updates and a linear decay to 15 percent, gradient clipping at 1.0, batch 32 and 4,500 updates, for seeds 6304, 6305 and 6306.
+  - Each (K, regime) training stream holds 144,000 examples made by the course generator from its `train` seeds, and is shared by every run that trains on it. The seed sets the initial weights and the order in which the stream is read.
+  - `results/task2/checks/mqar_checks.json` records the following: every frozen record is rebuilt exactly by the generator; the regime distance limits; and no training sequence equals a development or test sequence.
+- **Mechanisms:**
+  - dense causal attention
+  - a causal window of 64 positions
+  - a local and dilated mix: two heads see the last 64 positions, and two heads see offsets 0, 4, ..., 252
+  - causal ELU+1 linear attention with the running state materialized at every position
+
+  The window and dilated masks are dense boolean masks applied to dense scores. They are correctness implementations, not sparse kernels.
+- **Evaluation:**
+  - Development accuracy is measured at updates 500, 1,000, 1,500, 2,000, 3,000 and 4,500.
+  - At the end, every model is tested on all 9,216 frozen test sequences (every K and regime), with accuracy also split into distance bins.
+  - The dense models are evaluated a second time with the 64-position window imposed at test time only.
+- **Resource costs:** a forward-only sweep on random input embeddings measures time and memory at lengths 256 to 8192.
+
+### Part C: KV cache memory of Qwen2.5-1.5B-Instruct
+
+**Prompt split.** Each prompt is the chat template applied to the case text. It is split on tokenizer offsets into the context (everything before `QUESTION_BEGIN`) and the question suffix.
+
+**Prefill and scoring.**
+1. The context is prefilled once in FP16 with SDPA.
+2. For question-aware scoring, the suffix is run once on the full cache. Pre-hooks on each attention layer rebuild the rotary queries and keys, and compute FP32 causal attention from every suffix token to every context position. The mass per position is summed over suffix tokens and over the six query heads of each key value head, then max-pooled over 7 positions.
+3. That pass's suffix keys and values are discarded.
+
+**Answering.** Each cache variant is then built from the context cache. The suffix is prefilled again through it at its original absolute positions, so every answer depends only on the compressed cache. The gold code is teacher-forced on a copy of the cache, and the answer is decoded greedily for up to 16 tokens.
+
+**Budget.** Every prompt has one budget: the serialized bytes of uniform INT4 with channel-wise keys and token-wise values on its context. Groups are 64 elements with an FP16 scale and an FP16 offset, and the trailing `L mod 64` tokens stay FP16.
+
+| Variant | Storage |
+|---|---|
+| sink and recent | 8 sink and the most recent positions in FP16, as many as fit |
+| question aware | 8 sink, 64 recent, then the highest-scoring positions, chosen per layer and key value head; a 2 byte index per selected position is counted |
+| INT4 token wise | keys and values grouped along features |
+| INT4 channel K | keys grouped along tokens per channel, values along features |
+| hybrid | 8 sink, 64 recent and the highest-scoring positions in FP16; the rest in INT2 complete groups (keys channel-wise, values token-wise); an incomplete INT2 group stays FP16 |
+
+During decoding the INT4 caches quantize every newly completed 64-token group.
+
+**Checks.** `kv/validation.json` covers:
+- split prefill against one full forward
+- an untouched edited cache against `generate`
+- a shared random eviction against a full forward with an equivalent 4D mask
+
+The packed byte counts are checked against the formula in the manual.
+
+### Running
+
+The study runs as one offline Kaggle commit on two T4 GPUs:
+
+```bash
+bash scripts/run_task2_kaggle.sh
+```
+
+The script runs a smoke pass of every part first. Then Part A followed by Part B runs on the first GPU while Part C runs on the second, and `analyze.py` builds `results/task2/tables` and `results/task2/figures`. Each part can be run on its own:
+- `python -m task2_attention.exact`
+- `python -m task2_attention.train_recall --stage data|train|sweep`
+- `python -m task2_attention.kv_eval`
+
+Adding `--smoke` runs small sizes, and `--tiny` gives `kv_eval` a small random model with the real tokenizer. The final MQAR checkpoints are written to `outputs/task2/checkpoints/` and are not committed.
+
 ## Attribution
 
-- Dataset preparation uses `setup_data.py` from the course data repository (`AbDu11aHHH/atml-pa4-datasets`), which is cloned at a fixed commit and not modified.
+- Dataset preparation uses `setup_data.py` from the course data repository (`AbDu11aHHH/atml-pa4-datasets`), which is cloned at a fixed commit and not modified. Task 2 imports the course MQAR generator from the same clone.
 - The HellaSwag text cleaning follows the hellaswag task of EleutherAI lm-evaluation-harness, which is also used to cross check the scoring.

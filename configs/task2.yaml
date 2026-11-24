@@ -1,0 +1,115 @@
+# every setting used by the attention and context memory study fixed before any result exists
+seed: 6304
+
+paths:
+  course_dir: data/course
+  mqar_dir: data/course/data/mqar
+  kv_cases: data/course/data/kv_retrieval/kv_retrieval_cases.jsonl.gz
+  lock: configs/data_lock/local_source_revisions.json
+  checksums: configs/data_lock/task2_sha256.json
+  results_dir: results/task2
+  outputs_dir: outputs/task2
+
+# part a exact attention on random tensors
+exact:
+  batch: 2
+  heads: 4
+  head_dim: 64
+  lengths: [256,512,1024,2048,4096,8192]
+  dtypes: [float16,float32]
+  tile: 128
+  # tile sizes checked for exactness at the shorter lengths
+  tile_sweep: [32,64,128,256]
+  tile_sweep_max_len: 1024
+  # gradients are compared against the dense fp32 reference up to this length
+  grad_max_len: 4096
+  warmup: 3
+  reps: 10
+  extreme_scale: 100.0
+  # memory kept free when deciding whether a condition fits on the gpu
+  memory_margin_gb: 1.0
+
+# part b multi query associative recall
+mqar:
+  length: 256
+  vocab: 256
+  values: 64
+  value_offset: 128
+  window: 64
+  dilation: 4
+  dilated_positions: 64
+  bins: [0,32,64,128,256]
+  model:
+    dim: 128
+    heads: 4
+    blocks: 2
+    mlp_ratio: 4
+  train:
+    batch: 32
+    updates: 4500
+    lr: 8.0e-4
+    weight_decay: 0.01
+    warmup: 200
+    final_lr_fraction: 0.15
+    clip: 1.0
+    log_every: 50
+    eval_at: [500,1000,1500,2000,3000,4500]
+    eval_batch: 256
+  seeds: [6304,6305,6306]
+  # every required run as name mechanism training regime and number of pairs
+  runs:
+    - {name: dense_mixed_k4,mechanism: dense,regime: mixed,k: 4}
+    - {name: dense_mixed_k8,mechanism: dense,regime: mixed,k: 8}
+    - {name: dense_mixed_k16,mechanism: dense,regime: mixed,k: 16}
+    - {name: dense_near_k16,mechanism: dense,regime: near,k: 16}
+    - {name: window_near_k4,mechanism: window,regime: near,k: 4}
+    - {name: window_near_k8,mechanism: window,regime: near,k: 8}
+    - {name: window_near_k16,mechanism: window,regime: near,k: 16}
+    - {name: window_mixed_k16,mechanism: window,regime: mixed,k: 16}
+    - {name: linear_mixed_k4,mechanism: linear,regime: mixed,k: 4}
+    - {name: linear_mixed_k8,mechanism: linear,regime: mixed,k: 8}
+    - {name: linear_mixed_k16,mechanism: linear,regime: mixed,k: 16}
+    - {name: dilated_mixed_k4,mechanism: dilated,regime: mixed,k: 4}
+    - {name: dilated_mixed_k16,mechanism: dilated,regime: mixed,k: 16}
+  # dense models that also get the window mask imposed at test time only
+  test_window_runs: [dense_mixed_k4,dense_mixed_k8,dense_mixed_k16,dense_near_k16]
+  sweep:
+    lengths: [256,1024,4096,8192]
+    batch: 2
+    warmup: 3
+    reps: 10
+
+# part c pretrained kv memory
+kv:
+  model: Qwen/Qwen2.5-1.5B-Instruct
+  dtype: float16
+  attn: sdpa
+  question_marker: QUESTION_BEGIN
+  group: 64
+  bits: 4
+  hybrid_bits: 2
+  sink: 8
+  recent: 64
+  # snapkv style max pooling of the question scores fixed before any result
+  pool: 7
+  index_bytes: 2
+  max_new_tokens: 16
+  methods: [fp16,sink_recent,question_aware,int4_token,int4_channel,hybrid]
+  bootstrap: 10000
+  # aligned qualitative cases chosen by rule before any result
+  qualitative: {target_tokens: 4096,distractors: 8,case: 0}
+  bench:
+    batches: [1,8]
+    lengths: [2048,4096]
+    warmup: 3
+    reps: 10
+
+# sizes for the quick pass that runs every stage before the full run
+smoke:
+  exact_lengths: [64,128]
+  exact_reps: 2
+  mqar_updates: 20
+  mqar_eval_at: [10,20]
+  mqar_test_per_set: 16
+  sweep_lengths: [64,128]
+  kv_cases: 3

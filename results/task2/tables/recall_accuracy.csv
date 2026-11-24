@@ -38,6 +38,9 @@ linear_mixed_k4,linear,4,mixed,trained,near,0.9912109375,0.004985492640786655,3
 linear_mixed_k8,linear,8,mixed,trained,far,0.7030843098958334,0.49669518145956854,3
 linear_mixed_k8,linear,8,mixed,trained,mixed,0.7007242838541666,0.5001282279178891,3
 linear_mixed_k8,linear,8,mixed,trained,near,0.7009684244791666,0.49992439075839873,3
+local_linear_mixed_k16,local_linear,16,mixed,trained,far,0.06337483723958333,0.00044153919299745175,3
+local_linear_mixed_k16,local_linear,16,mixed,trained,mixed,0.06461588541666667,0.00024667064723677887,3
+local_linear_mixed_k16,local_linear,16,mixed,trained,near,0.06290690104166667,0.0012120256354660227,3
 window_mixed_k16,window,16,mixed,trained,far,0.014180501302083334,0.0010109259642582071,3
 window_mixed_k16,window,16,mixed,trained,mixed,0.041788736979166664,0.0006411112978755171,3
 window_mixed_k16,window,16,mixed,trained,near,0.06939697265625,0.0012191762912254747,3

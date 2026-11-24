@@ -155,6 +155,8 @@ def recall_part(res,cfg,figs,tables):
         axes[0,j].set_ylabel("cross entropy at queries")
         axes[1,j].set_ylabel("accuracy at trained K (%)")
         axes[1,j].set_ylim(-3,103)
+        # sharing one loss range so the plateau of every mechanism compares at a glance
+        axes[0,j].set_ylim(-0.1,4.5)
         axes[1,j].legend(loc="upper center",bbox_to_anchor=(0.5,-0.2),ncol=2,frameon=False,fontsize=8)
     fig.tight_layout()
     fig.savefig(figs/"recall_curves.png",dpi=200,bbox_inches="tight")

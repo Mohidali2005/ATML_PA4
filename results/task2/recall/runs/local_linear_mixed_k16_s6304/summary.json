@@ -1,0 +1,14 @@
+{
+  "run": "local_linear_mixed_k16",
+  "seed": 6304,
+  "mechanism": "local_linear",
+  "train_k": 16,
+  "train_regime": "mixed",
+  "parameters": 437824,
+  "updates": 4500,
+  "train_seconds": 159.21159183100008,
+  "ms_per_update": 35.38035374022224,
+  "peak_train_gb": 1.983648768,
+  "final_train_loss": 2.8338565826416016,
+  "device": "Tesla T4"
+}

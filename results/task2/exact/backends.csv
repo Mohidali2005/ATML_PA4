@@ -1,0 +1,9 @@
+dtype,backend,supported,reason
+float16,flash,False,
+float16,efficient,True,
+float16,cudnn,False,
+float16,math,True,
+float32,flash,False,
+float32,efficient,True,
+float32,cudnn,False,
+float32,math,True,

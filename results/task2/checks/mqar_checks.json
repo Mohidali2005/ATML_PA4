@@ -1,0 +1,103 @@
+{
+  "splits": {
+    "development": {
+      "records": 2304,
+      "per_set": {
+        "K4_near": 256,
+        "K4_far": 256,
+        "K4_mixed": 256,
+        "K8_near": 256,
+        "K8_far": 256,
+        "K8_mixed": 256,
+        "K16_near": 256,
+        "K16_far": 256,
+        "K16_mixed": 256
+      },
+      "distance_range": {
+        "near": [
+          3,
+          63
+        ],
+        "far": [
+          128,
+          250
+        ],
+        "mixed": [
+          5,
+          250
+        ]
+      },
+      "far_queries_not_multiple_of_4": 5423,
+      "queries": 21504
+    },
+    "test": {
+      "records": 9216,
+      "per_set": {
+        "K4_near": 1024,
+        "K4_far": 1024,
+        "K4_mixed": 1024,
+        "K8_near": 1024,
+        "K8_far": 1024,
+        "K8_mixed": 1024,
+        "K16_near": 1024,
+        "K16_far": 1024,
+        "K16_mixed": 1024
+      },
+      "distance_range": {
+        "near": [
+          3,
+          63
+        ],
+        "far": [
+          128,
+          250
+        ],
+        "mixed": [
+          3,
+          250
+        ]
+      },
+      "far_queries_not_multiple_of_4": 21350,
+      "queries": 86016
+    }
+  },
+  "train_streams": {
+    "k4_mixed": {
+      "examples": 144000,
+      "unique": 144000,
+      "equal_to_development": 0,
+      "equal_to_test": 0
+    },
+    "k4_near": {
+      "examples": 144000,
+      "unique": 144000,
+      "equal_to_development": 0,
+      "equal_to_test": 0
+    },
+    "k8_mixed": {
+      "examples": 144000,
+      "unique": 144000,
+      "equal_to_development": 0,
+      "equal_to_test": 0
+    },
+    "k8_near": {
+      "examples": 144000,
+      "unique": 144000,
+      "equal_to_development": 0,
+      "equal_to_test": 0
+    },
+    "k16_mixed": {
+      "examples": 144000,
+      "unique": 144000,
+      "equal_to_development": 0,
+      "equal_to_test": 0
+    },
+    "k16_near": {
+      "examples": 144000,
+      "unique": 144000,
+      "equal_to_development": 0,
+      "equal_to_test": 0
+    }
+  },
+  "development_test_overlap": 0
+}

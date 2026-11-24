@@ -57,7 +57,10 @@ def exact_part(res,figs,tables):
             for impl,g in fid[fid["dtype"] == dt].groupby("impl"):
                 g = g.dropna(subset=[col]).sort_values("length")
                 if len(g):
-                    ax.plot(g["length"],g[col],marker="o",color=IMPL_COLOR[impl],label=IMPL_LABEL[impl])
+                    # drawing the default dispatch dashed on top since it runs the efficient kernel and would hide behind it
+                    dashed = impl == "sdpa"
+                    ax.plot(g["length"],g[col],marker="x" if dashed else "o",color=IMPL_COLOR[impl],label=IMPL_LABEL[impl],
+                            ls="--" if dashed else "-",zorder=3 if dashed else 2)
             ax.set_yscale("log")
             log2_axis(ax,ticks)
             ax.set_title(f"({'ab'[j] if i == 0 else 'cd'[j]}) {title} error, {dt}",fontsize=10)
@@ -77,7 +80,10 @@ def exact_part(res,figs,tables):
             for impl,g in ok[ok["dtype"] == dt].groupby("impl"):
                 g = g.dropna(subset=[col]).sort_values("length")
                 if len(g):
-                    ax.plot(g["length"],g[col],marker="o",color=IMPL_COLOR[impl],label=IMPL_LABEL[impl])
+                    # drawing the default dispatch dashed on top since it runs the efficient kernel and would hide behind it
+                    dashed = impl == "sdpa"
+                    ax.plot(g["length"],g[col],marker="x" if dashed else "o",color=IMPL_COLOR[impl],label=IMPL_LABEL[impl],
+                            ls="--" if dashed else "-",zorder=3 if dashed else 2)
             if ax.has_data():
                 ax.set_yscale("log")
             log2_axis(ax,ticks)
@@ -142,8 +148,8 @@ def recall_part(res,cfg,figs,tables):
             cv = cv.groupby("update")["accuracy"].agg(["mean","std"])
             axes[1,j].errorbar(cv.index,100*cv["mean"],yerr=100*cv["std"].fillna(0),color=MECH_COLOR[m],ls=styles[s % 4],
                                marker="o",ms=3,capsize=2,label=f"K={x['k']} {x['regime']}")
-        axes[0,j].set_title(f"({'abcde'[j]}) {MECH_LABEL[m]}, training loss",fontsize=10)
-        axes[1,j].set_title(f"({'fghij'[j]}) {MECH_LABEL[m]}, development mixed",fontsize=10)
+        axes[0,j].set_title(f"({'abcdefghij'[j]}) {MECH_LABEL[m]}, training loss",fontsize=10)
+        axes[1,j].set_title(f"({'abcdefghij'[len(mechs)+j]}) {MECH_LABEL[m]}, development mixed",fontsize=10)
         axes[0,j].set_xlabel("update")
         axes[1,j].set_xlabel("update")
         axes[0,j].set_ylabel("cross entropy at queries")
@@ -300,7 +306,12 @@ def kv_part(res,cfg,figs,tables):
         g = g.loc[levels]
         w = 0.8/len(methods)
         for i,m in enumerate(methods):
-            axes[j].bar(np.arange(len(levels))+i*w-0.4+w/2,100*g[m].values,w,color=METHOD_COLOR[m],label=METHOD_LABEL[m])
+            xs = np.arange(len(levels))+i*w-0.4+w/2
+            axes[j].bar(xs,100*g[m].values,w,color=METHOD_COLOR[m],label=METHOD_LABEL[m])
+            # marking bars of zero height so a method at zero accuracy stays visible
+            for xv,yv in zip(xs,g[m].values):
+                if yv == 0:
+                    axes[j].text(xv,1,"0",ha="center",va="bottom",fontsize=7,color=METHOD_COLOR[m])
         axes[j].set_xticks(range(len(levels)))
         axes[j].set_xticklabels([str(x) for x in levels])
         axes[j].set_ylim(0,105)
@@ -325,6 +336,7 @@ def kv_part(res,cfg,figs,tables):
         ax.set_title(title,fontsize=10)
         if col == "kl_post":
             ax.set_yscale("symlog",linthresh=1e-3)
+            ax.set_ylim(bottom=0)
     axes[0].set_ylabel("nats")
     axes[1].set_ylabel("nats")
     fig.tight_layout()

@@ -1,0 +1,40 @@
+{
+  "model_revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+  "cache_shape": {
+    "layers": 28,
+    "kv_heads": 2,
+    "head_dim": 128
+  },
+  "checks": [
+    {
+      "id": "KV-2048-start-0-00",
+      "context_tokens": 2633,
+      "suffix_tokens": 34,
+      "split_vs_full_max_abs_logit": 0.08203125,
+      "split_vs_full_same_argmax": true,
+      "full_retention_tokens_equal_generate": true,
+      "full_retention_max_abs_logit_vs_plain_cache": 0.0,
+      "evicted_vs_masked_full_max_abs_logit": 0.109375,
+      "evicted_vs_masked_same_argmax": true,
+      "dropped_positions": 853,
+      "all_finite": true,
+      "generate_text": "26836",
+      "edited_text": "26836"
+    },
+    {
+      "id": "KV-4096-start-0-00",
+      "context_tokens": 5217,
+      "suffix_tokens": 34,
+      "split_vs_full_max_abs_logit": 0.1015625,
+      "split_vs_full_same_argmax": true,
+      "full_retention_tokens_equal_generate": true,
+      "full_retention_max_abs_logit_vs_plain_cache": 0.0,
+      "evicted_vs_masked_full_max_abs_logit": 0.14453125,
+      "evicted_vs_masked_same_argmax": true,
+      "dropped_positions": 1715,
+      "all_finite": true,
+      "generate_text": "45142",
+      "edited_text": "45142"
+    }
+  ]
+}

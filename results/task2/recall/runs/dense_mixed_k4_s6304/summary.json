@@ -1,0 +1,14 @@
+{
+  "run": "dense_mixed_k4",
+  "seed": 6304,
+  "mechanism": "dense",
+  "train_k": 4,
+  "train_regime": "mixed",
+  "parameters": 437824,
+  "updates": 4500,
+  "train_seconds": 120.4315161549996,
+  "ms_per_update": 26.762559145555468,
+  "peak_train_gb": 1.129059328,
+  "final_train_loss": 0.0003108212840743363,
+  "device": "Tesla T4"
+}

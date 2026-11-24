@@ -1,0 +1,8 @@
+[W1124 17:45:44.402459497 sdp_utils.cpp:342] Warning: Flash attention only supports gpu architectures in the range [sm80, sm121]. Attempting to run on a sm 7.5 gpu. (function check_flash_attention_hardware_support)
+[W1124 17:45:44.403936392 sdp_utils.cpp:647] Warning: cuDNN MHA only supports gpu architectures in the range [sm80, sm121]. Attempting to run on a sm 7.5 gpu. (function check_cudnn_hardware_support)
+/usr/local/lib/python3.13/dist-packages/torch/profiler/profiler.py:224: UserWarning: Warning: Profiler clears events at the end of each cycle.Only events from the current cycle will be reported.To keep events across cycles, set acc_events=True.
+  _warn_once(
+[W1124 17:45:49.362016889 sdp_utils.cpp:342] Warning: Flash attention only supports gpu architectures in the range [sm80, sm121]. Attempting to run on a sm 7.5 gpu. (function check_flash_attention_hardware_support)
+[W1124 17:45:49.362109751 sdp_utils_cpp.h:91] Warning: Expected query, key and value to all be of dtype: {Half}. Got Query dtype: float, Key dtype: float, and Value dtype: float instead. (function check_tensor_dtype)
+exact attention correctness written
+exact attention timing written

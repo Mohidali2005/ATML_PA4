@@ -1,0 +1,10 @@
+run,seed,mechanism,train_k,train_regime,mask,test_k,test_regime,queries,correct,accuracy,loss
+linear_mixed_k8,6306,linear,8,mixed,trained,4,near,4096,4042,0.98681640625,0.04534205235540867
+linear_mixed_k8,6306,linear,8,mixed,trained,4,far,4096,4066,0.99267578125,0.01987917721271515
+linear_mixed_k8,6306,linear,8,mixed,trained,4,mixed,4096,4048,0.98828125,0.030759711749851704
+linear_mixed_k8,6306,linear,8,mixed,trained,8,near,8192,8041,0.9815673828125,0.049959346652030945
+linear_mixed_k8,6306,linear,8,mixed,trained,8,far,8192,8037,0.9810791015625,0.05402111914008856
+linear_mixed_k8,6306,linear,8,mixed,trained,8,mixed,8192,8044,0.98193359375,0.05073505733162165
+linear_mixed_k8,6306,linear,8,mixed,trained,16,near,16384,8339,0.50897216796875,4.851457953453064
+linear_mixed_k8,6306,linear,8,mixed,trained,16,far,16384,8342,0.5091552734375,4.847609519958496
+linear_mixed_k8,6306,linear,8,mixed,trained,16,mixed,16384,8342,0.5091552734375,4.835538744926453

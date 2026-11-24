@@ -1,0 +1,6 @@
+method,prompts,max_bytes_over_budget,min_fraction,max_fraction,packed_equals_formula,any_over_budget
+hybrid,180,-76944,0.2725792232331985,0.2870201609097773,,False
+int4_channel,180,0,0.28125,0.2977099236641221,True,False
+int4_token,180,0,0.28125,0.2977099236641221,True,False
+question_aware,180,-7056,0.2810936904535061,0.2976159947519084,,False
+sink_recent,180,0,0.28125,0.2977099236641221,,False

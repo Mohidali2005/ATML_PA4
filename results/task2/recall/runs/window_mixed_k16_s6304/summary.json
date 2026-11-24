@@ -1,0 +1,14 @@
+{
+  "run": "window_mixed_k16",
+  "seed": 6304,
+  "mechanism": "window",
+  "train_k": 16,
+  "train_regime": "mixed",
+  "parameters": 437824,
+  "updates": 4500,
+  "train_seconds": 125.02529647200026,
+  "ms_per_update": 27.78339921600006,
+  "peak_train_gb": 1.129059328,
+  "final_train_loss": 3.8813233375549316,
+  "device": "Tesla T4"
+}

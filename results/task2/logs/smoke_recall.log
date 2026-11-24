@@ -1,0 +1,15 @@
+mqar data checked for 6 training streams
+finished dense_mixed_k4 seed 6304
+finished dense_mixed_k8 seed 6304
+finished dense_mixed_k16 seed 6304
+finished dense_near_k16 seed 6304
+finished window_near_k4 seed 6304
+finished window_near_k8 seed 6304
+finished window_near_k16 seed 6304
+finished window_mixed_k16 seed 6304
+finished linear_mixed_k4 seed 6304
+finished linear_mixed_k8 seed 6304
+finished linear_mixed_k16 seed 6304
+finished dilated_mixed_k4 seed 6304
+finished dilated_mixed_k16 seed 6304
+mqar resource sweep written

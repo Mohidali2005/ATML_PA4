@@ -1,0 +1,11 @@
+impl,dtype,256,512,1024,2048,4096,8192
+dense,float16,ok,ok,ok,ok,ok,ok
+dense,float32,ok,ok,ok,ok,ok,oom
+sdpa,float16,ok,ok,ok,ok,ok,ok
+sdpa,float32,ok,ok,ok,ok,ok,ok
+sdpa_efficient,float16,ok,ok,ok,ok,ok,ok
+sdpa_efficient,float32,ok,ok,ok,ok,ok,ok
+sdpa_math,float16,ok,ok,ok,ok,ok,ok
+sdpa_math,float32,ok,ok,ok,ok,ok,ok
+tiled,float16,ok,ok,ok,ok,ok,ok
+tiled,float32,ok,ok,ok,ok,ok,ok

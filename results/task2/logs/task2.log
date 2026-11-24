@@ -1,0 +1,10 @@
+all 3 frozen task2 files hold the committed records
+name, memory.total [MiB], driver_version
+Tesla T4, 15360 MiB, 580.178.04
+Tesla T4, 15360 MiB, 580.178.04
+smoke passed
+exact exit 0
+recall exit 0
+kv exit 0
+analyze exit 0
+finished task2

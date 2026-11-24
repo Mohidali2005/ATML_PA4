@@ -1,0 +1,14 @@
+{
+  "run": "window_near_k4",
+  "seed": 6306,
+  "mechanism": "window",
+  "train_k": 4,
+  "train_regime": "near",
+  "parameters": 437824,
+  "updates": 4500,
+  "train_seconds": 123.30309670000042,
+  "ms_per_update": 27.400688155555653,
+  "peak_train_gb": 1.129059328,
+  "final_train_loss": 0.0002355419856030494,
+  "device": "Tesla T4"
+}

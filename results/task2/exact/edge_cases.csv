@@ -1,0 +1,15 @@
+case,dtype,impl,nan,elements,max_abs_output,finite,out_max_abs,out_rel
+all_masked_row,float16,dense,512,512,0.0,,,
+all_masked_row,float16,tiled,0,512,0.0,,,
+all_masked_row,float16,sdpa,0,512,0.0,,,
+scores_times_100,float16,dense_stable,0,131072,,True,0.15514490181256813,0.004649660975243305
+scores_times_100,float16,dense_unstable,130880,131072,,False,,
+scores_times_100,float16,tiled,0,131072,,True,0.15563318306256813,0.004650210982104433
+scores_times_100,float16,sdpa,0,131072,,True,0.09519927678719498,0.0025119336068500243
+all_masked_row,float32,dense,512,512,0.0,,,
+all_masked_row,float32,tiled,0,512,0.0,,,
+all_masked_row,float32,sdpa,0,512,0.0,,,
+scores_times_100,float32,dense_stable,0,131072,,True,8.250821679905984e-05,2.4267540450141284e-06
+scores_times_100,float32,dense_unstable,128960,131072,,False,,
+scores_times_100,float32,tiled,0,131072,,True,8.253801912144754e-05,2.4269062102268734e-06
+scores_times_100,float32,sdpa,0,131072,,True,7.973660081700418e-05,2.414259272825036e-06

@@ -1,0 +1,30 @@
+{
+  "float16": {
+    "length": 1024,
+    "kernels": [
+      "ScaledDotProductEfficientAttentionBackward0",
+      "aten::_efficient_attention_backward",
+      "aten::_efficient_attention_forward",
+      "aten::_scaled_dot_product_efficient_attention",
+      "aten::_scaled_dot_product_efficient_attention_backward",
+      "aten::scaled_dot_product_attention",
+      "autograd::engine::evaluate_function: ScaledDotProductEfficientAttentionBackward0",
+      "fmha_cutlassB_f16_aligned_64x64_k64_sm75(PyTorchMemEffAttention::AttentionBackwardKernel<cutlass::arch::Sm75, cutlass::half_t, true, false, false, 64, 64, 64, false>::Params)",
+      "fmha_cutlassF_f16_aligned_64x64_rf_sm75(PyTorchMemEffAttention::AttentionKernel<cutlass::half_t, cutlass::arch::Sm75, true, 64, 64, 64, true, true>::Params)"
+    ]
+  },
+  "float32": {
+    "length": 1024,
+    "kernels": [
+      "ScaledDotProductEfficientAttentionBackward0",
+      "aten::_efficient_attention_backward",
+      "aten::_efficient_attention_forward",
+      "aten::_scaled_dot_product_efficient_attention",
+      "aten::_scaled_dot_product_efficient_attention_backward",
+      "aten::scaled_dot_product_attention",
+      "autograd::engine::evaluate_function: ScaledDotProductEfficientAttentionBackward0",
+      "fmha_cutlassB_f32_aligned_64x64_k64_sm75(PyTorchMemEffAttention::AttentionBackwardKernel<cutlass::arch::Sm75, float, true, false, false, 64, 64, 64, false>::Params)",
+      "fmha_cutlassF_f32_aligned_64x64_rf_sm75(PyTorchMemEffAttention::AttentionKernel<float, cutlass::arch::Sm75, true, 64, 64, 64, true, true>::Params)"
+    ]
+  }
+}

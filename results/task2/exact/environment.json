@@ -1,0 +1,7 @@
+{
+  "torch": "2.11.0+cu130",
+  "transformers": "4.57.1",
+  "cuda": "13.0",
+  "device": "Tesla T4",
+  "capability": "7.5"
+}

@@ -1,0 +1,11 @@
+length,dtype,impl,cut,max_change_before_cut,max_change_after_cut
+512,float16,dense,256,0.0,40.53125
+512,float16,tiled,256,0.0,40.53125
+512,float16,sdpa,256,0.0,40.53125
+512,float16,sdpa_efficient,256,0.0,40.53125
+512,float16,sdpa_math,256,0.0,40.53125
+512,float32,dense,256,0.0,40.53584671020508
+512,float32,tiled,256,0.0,40.53584671020508
+512,float32,sdpa,256,0.0,40.53584671020508
+512,float32,sdpa_efficient,256,0.0,40.53584671020508
+512,float32,sdpa_math,256,0.0,40.535850524902344

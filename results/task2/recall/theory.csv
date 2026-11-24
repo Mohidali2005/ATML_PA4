@@ -1,0 +1,5 @@
+mechanism,pairs_per_layer,mean_positions_per_query,max_offset_one_layer,max_offset_two_layers,far_offsets_reachable_two_layers,decode_state_floats_per_layer,decode_state_bytes_fp32
+dense,131584.0,128.5,255,255,1.0,65536,262144
+window,57472.0,56.125,63,126,0.0,16384,65536
+dilated,45376.0,44.3125,252,255,1.0,40576,162304
+linear,,,255,255,1.0,4224,16896

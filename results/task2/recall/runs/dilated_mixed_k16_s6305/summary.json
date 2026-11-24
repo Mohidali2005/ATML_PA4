@@ -1,0 +1,14 @@
+{
+  "run": "dilated_mixed_k16",
+  "seed": 6305,
+  "mechanism": "dilated",
+  "train_k": 16,
+  "train_regime": "mixed",
+  "parameters": 437824,
+  "updates": 4500,
+  "train_seconds": 125.32057617400005,
+  "ms_per_update": 27.849016927555567,
+  "peak_train_gb": 1.129255936,
+  "final_train_loss": 3.191560745239258,
+  "device": "Tesla T4"
+}

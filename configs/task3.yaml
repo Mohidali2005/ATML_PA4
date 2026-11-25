@@ -1,0 +1,102 @@
+# every setting used by the distillation and speculative decoding study fixed before any result exists
+seed: 6304
+
+paths:
+  course_dir: data/course
+  lock: configs/data_lock/local_source_revisions.json
+  checksums: configs/data_lock/task3_sha256.json
+  results_dir: results/task3
+  artifacts_dir: outputs/task3
+
+models:
+  target: Qwen/Qwen2.5-1.5B-Instruct
+  draft: Qwen/Qwen2.5-0.5B-Instruct
+  dtype: float16
+  attn: sdpa
+  # both models share the tokenizer and stop at either token
+  eos: [151645,151643]
+
+# exactness tests on small markov chains and cache checks on the real models
+checks:
+  samples: 100000
+  alpha: 0.01
+  min_expected: 10
+  gammas: [1,2,4]
+  # rows are the next symbol distribution after each symbol and the chain starts from symbol 0
+  toy:
+    target: [[0.50,0.30,0.20],[0.20,0.25,0.55],[0.40,0.40,0.20]]
+    draft: [[0.20,0.30,0.50],[0.45,0.35,0.20],[0.15,0.25,0.60]]
+    length: 3
+  # symbol 2 ends the sequence
+  toy_eos:
+    length: 4
+    eos: 2
+  # flatter chain so that all 729 sequences of length six keep enough expected counts
+  toy_long:
+    target: [[0.40,0.33,0.27],[0.27,0.33,0.40],[0.33,0.27,0.40]]
+    draft: [[0.27,0.28,0.45],[0.45,0.30,0.25],[0.20,0.50,0.30]]
+    length: 6
+    gamma: 4
+    repeats: 8
+  real_prompts_per_split: 2
+  real_tokens: 24
+
+distill:
+  seeds: [6304,6305]
+  methods: ["off","on"]
+  quota: {math: 30000,short: 10000}
+  cap: {math: 192,short: 32}
+  # supervised tokens of each category in every update before the short final one
+  per_update: {math: 192,short: 64}
+  lr: 3.0e-4
+  weight_decay: 0.01
+  clip: 1.0
+  init_scale: 4096.0
+  lora: {rank: 8,alpha: 16,targets: [q_proj,k_proj,v_proj,o_proj]}
+
+banks:
+  gamma: 4
+  cap: 192
+  # lower bound upper bound and number of saved positions of each response position bin
+  bins: [[1,16,8],[17,32,8],[33,64,16],[65,192,16]]
+  # seed of prompt j is the base plus 10007 j plus the offset of the bank
+  seed_step: 10007
+  seed_offset: {teacher: 0,original_draft: 123,exact_spec_original_gamma4: 456,off_6304: 1001,off_6305: 1002,on_6304: 1003,on_6305: 1004}
+
+benchmark:
+  gammas: [2,4]
+  reps: 2
+  cap: 64
+  warmup_prompts: 3
+  fixed_prompts: 24
+  fixed_tokens: 64
+  isolated_lengths: [64,128,256,512]
+  isolated_warmup: 5
+  isolated_reps: 30
+  batch_probe: {batches: [1,4,16],length: 128}
+  # the adapter that is also timed without merging
+  unmerged: on_6304
+
+quality:
+  reps: 2
+  cap: {math: 512,short: 32}
+  batch: 20
+
+analysis:
+  bootstrap: 10000
+  length_bins: [[1,4],[5,16],[17,63],[64,64]]
+
+# sizes for the quick pass that runs every stage before the full run
+smoke:
+  samples: 2000
+  train_prompts: 4
+  test_prompts_per_split: 2
+  quota: {math: 60,short: 20}
+  per_update: {math: 24,short: 8}
+  cap: {math: 20,short: 6}
+  bank_cap: 24
+  bench_cap: 12
+  fixed_prompts: 2
+  isolated_lengths: [16,32]
+  isolated_reps: 2
+  quality_cap: {math: 24,short: 8}

@@ -1,6 +1,6 @@
 # ATML PA4: Efficient Inference for Language Models
 
-Code, configurations and machine readable results for three studies of inference cost in language models. Task 1 covers pruning and weight quantization of a pretrained model. Task 2 and Task 3 are added in their own folders as they are completed.
+Code, configurations and machine readable results for three studies of inference cost in language models. Task 1 covers pruning and weight quantization of a pretrained model. Task 2 covers exact attention, associative recall and KV cache memory. Task 3 covers draft distillation and exact speculative decoding.
 
 ## Setup
 
@@ -182,6 +182,63 @@ The script runs a smoke pass of every part first. Then Part A followed by Part B
 - `python -m task2_attention.kv_eval`
 
 Adding `--smoke` runs small sizes, and `--tiny` gives `kv_eval` a small random model with the real tokenizer. The final MQAR checkpoints are written to `outputs/task2/checkpoints/` and are not committed.
+
+## Task 3: Draft distillation and speculative decoding
+
+All code is in `task3_speculative/` and every setting is in `configs/task3.yaml`. The target is `Qwen/Qwen2.5-1.5B-Instruct` and the draft is `Qwen/Qwen2.5-0.5B-Instruct`, both at the commits stored in the data lock. Prompts are the chat template with one user message, and both models stop at either of the two end tokens. `python -m task3_speculative.data --verify --tokenizers` checks three things: the records against `configs/data_lock/task3_sha256.json`, that no test prompt is in training, and that both tokenizers give identical ids on all 920 prompts.
+
+### Sampler
+
+`sampler.py` holds one implementation of exact speculative sampling for both the small Markov chains and the real models.
+- **Prefill:** both models prefill the prompt without its last token. Target-only decoding therefore uses exactly one target pass per output token.
+- **Proposal:** a round proposes `min(gamma, remaining - 1)` tokens and stops early if the draft samples an end token.
+- **Verification:** the target verifies the proposals in one pass. A proposal is accepted with probability `min(1, p/q)`. A rejection samples the normalized positive residual, and a fully accepted round adds a bonus token from the target.
+- **Caches:** both caches are cropped to the returned continuation after every round. After a fully accepted round the draft processes two tokens in its next pass.
+
+`python -m task3_speculative.checks --part toy` draws 100,000 sequences per condition from three-symbol chains and tests the joint sequence distribution:
+- length 3 at gamma 1, 2 and 4
+- a chain with an end symbol
+- a length 6 chain at gamma 4, repeated over eight seeds and also pooled
+
+Each condition includes a negative control that replaces the positive residual with p. `--part real` checks split prefill, rollback, cache state after a run, length caps, stopping and left padding on the pretrained models.
+
+### Distillation
+
+Every student starts from the original draft. The LoRA adapters have rank 8, alpha 16 and no dropout, on the q, k, v and o projections. Training minimizes the forward KL over the full vocabulary.
+- **Quota:** 40,000 teacher-scored response tokens per run (30,000 mathematics, 10,000 short form). Every update scores exactly 192 + 64 tokens, and the last one 48 + 16, so every run has 157 updates.
+- **Update boundary:** a response that crosses an update boundary is finished in the next update, and the carried tokens are logged.
+- **Prompt order:** each seed fixes one permutation per category, which both methods visit in the same order.
+- **Off-policy:** the prefixes come from one frozen teacher response for each of the 800 training prompts, shared by both seeds.
+- **On-policy:** the prefixes are sampled from the current student.
+- **Precision:** FP16 frozen backbone, FP32 adapters, FP16 autocast and dynamic loss scaling starting at 4096.
+- **Logs:** `results/task3/distill/<run>/presentations.jsonl.gz` holds one record per presentation.
+
+### Prefix banks
+
+The released bank script passes a `generator` argument that `generate` rejects in the pinned transformers version. It also leaves the repetition penalty of 1.1 from the generation config active, which would not match temperature 1 sampling. `rollouts.py` therefore samples the banks itself at temperature 1 with no penalty. It keeps the released prompts, seeds, 192 token cap, position rule and record format. The exact speculative bank uses the original draft at gamma 4. Each trained student also gets a bank of its own rollouts.
+
+### Evaluation
+
+- **Alignment:** forward and reverse KL, total variation, greedy agreement and expected acceptance of every draft on the same saved prefixes of all seven banks.
+- **Exactness of real samples:** for every emitted sequence, the surprisal under the target minus the target entropy is summed. The sum has mean zero for an exact sampler.
+- **Benchmark:** 120 test prompts, five drafts, gamma 2 and 4, two repetitions and a 64 token cap.
+  - Each speculative run has an adjacent target-only run, and the order alternates.
+  - A separate pass with synchronized timers splits every round into four parts.
+  - A fixed 64 token diagnostic on 24 mathematics prompts ignores end tokens.
+  - Isolated pass costs, a batch size probe and one unmerged adapter are timed as well.
+- **Quality:** standalone accuracy of the target and every draft, with caps of 512 (mathematics) and 32 (short form) tokens.
+
+### Running
+
+The toy tests run on the CPU. Everything else runs as one offline Kaggle commit on two T4 GPUs:
+
+```bash
+python -m task3_speculative.checks --part toy
+bash scripts/run_task3_kaggle.sh /kaggle/temp/artifacts
+python -m task3_speculative.analyze
+```
+
+The benchmark runs alone on one GPU after everything else has finished. Adapters and merged checkpoints are written to the artifacts folder and are not committed. Adding `--smoke --tiny` to any stage runs it on small random models on the CPU.
 
 ## Attribution
 

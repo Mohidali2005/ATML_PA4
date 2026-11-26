@@ -1,0 +1,671 @@
+{
+  "prompts": [
+    {
+      "id": "GSM8K-0000",
+      "split": "math",
+      "prompt_tokens": 94,
+      "target_split_block": {
+        "max_abs_prob": 0.001406848430633545,
+        "max_total_variation": 0.001701478729955852,
+        "same_argmax": 1.0
+      },
+      "target_split_single": {
+        "max_abs_prob": 0.0015556812286376953,
+        "max_total_variation": 0.001555713708512485,
+        "same_argmax": 1.0
+      },
+      "target_rollback_length_ok": true,
+      "target_rollback_max_abs_prob": 0.0,
+      "target_no_rollback_max_abs_prob": 0.6072116494178772,
+      "draft_split_block": {
+        "max_abs_prob": 0.0036176443099975586,
+        "max_total_variation": 0.003670744365081191,
+        "same_argmax": 1.0
+      },
+      "draft_split_single": {
+        "max_abs_prob": 0.0026028305292129517,
+        "max_total_variation": 0.0029246057383716106,
+        "same_argmax": 1.0
+      },
+      "draft_rollback_length_ok": true,
+      "draft_rollback_max_abs_prob": 0.0,
+      "draft_no_rollback_max_abs_prob": 0.719465970993042,
+      "gamma1_cache_lengths_ok": true,
+      "gamma1_target_after_run": {
+        "max_abs_prob": 0.0007956624031066895,
+        "max_total_variation": 0.000797672662883997,
+        "same_argmax": 1.0
+      },
+      "gamma1_draft_after_run": {
+        "max_abs_prob": 4.595518112182617e-05,
+        "max_total_variation": 4.7375851863762364e-05,
+        "same_argmax": 1.0
+      },
+      "gamma1_run": {
+        "rounds": 13,
+        "proposed": 12,
+        "accepted": 11,
+        "examined": 12,
+        "eos": false,
+        "truncated": true,
+        "eos_route": null
+      },
+      "gamma1_token_count_ok": true,
+      "gamma2_cache_lengths_ok": true,
+      "gamma2_target_after_run": {
+        "max_abs_prob": 3.5762786865234375e-07,
+        "max_total_variation": 9.322073992734659e-07,
+        "same_argmax": 1.0
+      },
+      "gamma2_draft_after_run": {
+        "max_abs_prob": 5.960464477539063e-08,
+        "max_total_variation": 5.4757666845262065e-08,
+        "same_argmax": 1.0
+      },
+      "gamma2_run": {
+        "rounds": 10,
+        "proposed": 18,
+        "accepted": 14,
+        "examined": 16,
+        "eos": false,
+        "truncated": true,
+        "eos_route": null
+      },
+      "gamma2_token_count_ok": true,
+      "gamma4_cache_lengths_ok": true,
+      "gamma4_target_after_run": {
+        "max_abs_prob": 0.003213346004486084,
+        "max_total_variation": 0.003721152897924185,
+        "same_argmax": 1.0
+      },
+      "gamma4_draft_after_run": {
+        "max_abs_prob": 0.0001845676451921463,
+        "max_total_variation": 0.0004114242910873145,
+        "same_argmax": 1.0
+      },
+      "gamma4_run": {
+        "rounds": 9,
+        "proposed": 28,
+        "accepted": 15,
+        "examined": 21,
+        "eos": false,
+        "truncated": true,
+        "eos_route": null
+      },
+      "gamma4_token_count_ok": true,
+      "cap1_tokens": 1,
+      "cap1_proposed": 0,
+      "cap2_tokens": 2,
+      "cap2_proposed": 1,
+      "cap3_tokens": 3,
+      "cap3_proposed": 3,
+      "self_draft_accepted_over_examined": 1.0,
+      "self_draft_full_rounds": 5,
+      "self_draft_rounds": 5,
+      "forced_eos": {
+        "stopped": true,
+        "route": "accepted",
+        "end_token_only_at_end": true
+      }
+    },
+    {
+      "id": "GSM8K-0001",
+      "split": "math",
+      "prompt_tokens": 94,
+      "target_split_block": {
+        "max_abs_prob": 0.002416670322418213,
+        "max_total_variation": 0.0024503134191036224,
+        "same_argmax": 1.0
+      },
+      "target_split_single": {
+        "max_abs_prob": 0.0025121569633483887,
+        "max_total_variation": 0.0025192168541252613,
+        "same_argmax": 1.0
+      },
+      "target_rollback_length_ok": true,
+      "target_rollback_max_abs_prob": 0.0,
+      "target_no_rollback_max_abs_prob": 0.7660626769065857,
+      "draft_split_block": {
+        "max_abs_prob": 0.0034782588481903076,
+        "max_total_variation": 0.0034800097346305847,
+        "same_argmax": 1.0
+      },
+      "draft_split_single": {
+        "max_abs_prob": 0.006794363260269165,
+        "max_total_variation": 0.006812116131186485,
+        "same_argmax": 1.0
+      },
+      "draft_rollback_length_ok": true,
+      "draft_rollback_max_abs_prob": 0.0,
+      "draft_no_rollback_max_abs_prob": 0.9304389953613281,
+      "gamma1_cache_lengths_ok": true,
+      "gamma1_target_after_run": {
+        "max_abs_prob": 0.0010117292404174805,
+        "max_total_variation": 0.0010132718598470092,
+        "same_argmax": 1.0
+      },
+      "gamma1_draft_after_run": {
+        "max_abs_prob": 0.00022494792938232422,
+        "max_total_variation": 0.0002286538656335324,
+        "same_argmax": 1.0
+      },
+      "gamma1_run": {
+        "rounds": 13,
+        "proposed": 12,
+        "accepted": 11,
+        "examined": 12,
+        "eos": false,
+        "truncated": true,
+        "eos_route": null
+      },
+      "gamma1_token_count_ok": true,
+      "gamma2_cache_lengths_ok": true,
+      "gamma2_target_after_run": {
+        "max_abs_prob": 9.5367431640625e-07,
+        "max_total_variation": 9.309452480010805e-07,
+        "same_argmax": 1.0
+      },
+      "gamma2_draft_after_run": {
+        "max_abs_prob": 2.384185791015625e-07,
+        "max_total_variation": 1.784541439064924e-07,
+        "same_argmax": 1.0
+      },
+      "gamma2_run": {
+        "rounds": 8,
+        "proposed": 16,
+        "accepted": 16,
+        "examined": 16,
+        "eos": false,
+        "truncated": true,
+        "eos_route": null
+      },
+      "gamma2_token_count_ok": true,
+      "gamma4_cache_lengths_ok": true,
+      "gamma4_target_after_run": {
+        "max_abs_prob": 0.002178490161895752,
+        "max_total_variation": 0.0021785811986774206,
+        "same_argmax": 1.0
+      },
+      "gamma4_draft_after_run": {
+        "max_abs_prob": 4.696846008300781e-05,
+        "max_total_variation": 5.059233444626443e-05,
+        "same_argmax": 1.0
+      },
+      "gamma4_run": {
+        "rounds": 12,
+        "proposed": 47,
+        "accepted": 12,
+        "examined": 23,
+        "eos": false,
+        "truncated": true,
+        "eos_route": null
+      },
+      "gamma4_token_count_ok": true,
+      "cap1_tokens": 1,
+      "cap1_proposed": 0,
+      "cap2_tokens": 2,
+      "cap2_proposed": 1,
+      "cap3_tokens": 3,
+      "cap3_proposed": 2,
+      "self_draft_accepted_over_examined": 1.0,
+      "self_draft_full_rounds": 5,
+      "self_draft_rounds": 5,
+      "forced_eos": {
+        "stopped": true,
+        "route": "accepted",
+        "end_token_only_at_end": true
+      }
+    },
+    {
+      "id": "SHORT-familiar-0000",
+      "split": "familiar",
+      "prompt_tokens": 50,
+      "target_split_block": {
+        "max_abs_prob": 0.003150433301925659,
+        "max_total_variation": 0.00449791643768549,
+        "same_argmax": 1.0
+      },
+      "target_split_single": {
+        "max_abs_prob": 0.002708524465560913,
+        "max_total_variation": 0.0032923598773777485,
+        "same_argmax": 1.0
+      },
+      "target_rollback_length_ok": true,
+      "target_rollback_max_abs_prob": 0.0,
+      "target_no_rollback_max_abs_prob": 0.9993195533752441,
+      "draft_split_block": {
+        "max_abs_prob": 0.0023536086082458496,
+        "max_total_variation": 0.0040383730083703995,
+        "same_argmax": 1.0
+      },
+      "draft_split_single": {
+        "max_abs_prob": 0.0019211769104003906,
+        "max_total_variation": 0.00404617702588439,
+        "same_argmax": 1.0
+      },
+      "draft_rollback_length_ok": true,
+      "draft_rollback_max_abs_prob": 0.0,
+      "draft_no_rollback_max_abs_prob": 0.9440488815307617,
+      "gamma1_cache_lengths_ok": true,
+      "gamma1_target_after_run": {
+        "max_abs_prob": 9.619398042559624e-07,
+        "max_total_variation": 9.58436885412084e-07,
+        "same_argmax": 1.0
+      },
+      "gamma1_draft_after_run": {
+        "max_abs_prob": 4.164391498306941e-09,
+        "max_total_variation": 5.661537016976581e-08,
+        "same_argmax": 1.0
+      },
+      "gamma1_run": {
+        "rounds": 1,
+        "proposed": 1,
+        "accepted": 1,
+        "examined": 1,
+        "eos": true,
+        "truncated": false,
+        "eos_route": "bonus"
+      },
+      "gamma1_token_count_ok": true,
+      "gamma2_cache_lengths_ok": true,
+      "gamma2_target_after_run": {
+        "max_abs_prob": 9.619398042559624e-07,
+        "max_total_variation": 9.58436885412084e-07,
+        "same_argmax": 1.0
+      },
+      "gamma2_draft_after_run": {
+        "max_abs_prob": 4.882662324234843e-06,
+        "max_total_variation": 4.894945050182287e-06,
+        "same_argmax": 1.0
+      },
+      "gamma2_run": {
+        "rounds": 1,
+        "proposed": 2,
+        "accepted": 2,
+        "examined": 2,
+        "eos": true,
+        "truncated": false,
+        "eos_route": "accepted"
+      },
+      "gamma2_token_count_ok": true,
+      "gamma4_cache_lengths_ok": true,
+      "gamma4_target_after_run": {
+        "max_abs_prob": 9.619398042559624e-07,
+        "max_total_variation": 9.58436885412084e-07,
+        "same_argmax": 1.0
+      },
+      "gamma4_draft_after_run": {
+        "max_abs_prob": 4.882662324234843e-06,
+        "max_total_variation": 4.894945050182287e-06,
+        "same_argmax": 1.0
+      },
+      "gamma4_run": {
+        "rounds": 1,
+        "proposed": 2,
+        "accepted": 2,
+        "examined": 2,
+        "eos": true,
+        "truncated": false,
+        "eos_route": "accepted"
+      },
+      "gamma4_token_count_ok": true,
+      "cap1_tokens": 1,
+      "cap1_proposed": 0,
+      "cap2_tokens": 2,
+      "cap2_proposed": 1,
+      "cap3_tokens": 3,
+      "cap3_proposed": 2,
+      "self_draft_accepted_over_examined": 1.0,
+      "self_draft_full_rounds": 1,
+      "self_draft_rounds": 1,
+      "forced_eos": {
+        "stopped": true,
+        "route": "accepted",
+        "end_token_only_at_end": true
+      }
+    },
+    {
+      "id": "SHORT-familiar-0001",
+      "split": "familiar",
+      "prompt_tokens": 52,
+      "target_split_block": {
+        "max_abs_prob": 0.0032040923833847046,
+        "max_total_variation": 0.004461022559553385,
+        "same_argmax": 1.0
+      },
+      "target_split_single": {
+        "max_abs_prob": 0.0029923617839813232,
+        "max_total_variation": 0.003880263539031148,
+        "same_argmax": 1.0
+      },
+      "target_rollback_length_ok": true,
+      "target_rollback_max_abs_prob": 0.0,
+      "target_no_rollback_max_abs_prob": 0.547479510307312,
+      "draft_split_block": {
+        "max_abs_prob": 0.0036927461624145508,
+        "max_total_variation": 0.003692767582833767,
+        "same_argmax": 1.0
+      },
+      "draft_split_single": {
+        "max_abs_prob": 0.0036926567554473877,
+        "max_total_variation": 0.003692734520882368,
+        "same_argmax": 1.0
+      },
+      "draft_rollback_length_ok": true,
+      "draft_rollback_max_abs_prob": 0.0,
+      "draft_no_rollback_max_abs_prob": 0.7870526313781738,
+      "gamma1_cache_lengths_ok": true,
+      "gamma1_target_after_run": {
+        "max_abs_prob": 1.0615330836571957e-09,
+        "max_total_variation": 1.437189922626203e-09,
+        "same_argmax": 1.0
+      },
+      "gamma1_draft_after_run": {
+        "max_abs_prob": 3.6582719076250214e-09,
+        "max_total_variation": 1.3213690586155735e-08,
+        "same_argmax": 1.0
+      },
+      "gamma1_run": {
+        "rounds": 7,
+        "proposed": 7,
+        "accepted": 4,
+        "examined": 7,
+        "eos": true,
+        "truncated": false,
+        "eos_route": "accepted"
+      },
+      "gamma1_token_count_ok": true,
+      "gamma2_cache_lengths_ok": true,
+      "gamma2_target_after_run": {
+        "max_abs_prob": 1.609325408935547e-05,
+        "max_total_variation": 1.776676253939513e-05,
+        "same_argmax": 1.0
+      },
+      "gamma2_draft_after_run": {
+        "max_abs_prob": 0.0011036768555641174,
+        "max_total_variation": 0.0011141601717099547,
+        "same_argmax": 1.0
+      },
+      "gamma2_run": {
+        "rounds": 11,
+        "proposed": 20,
+        "accepted": 13,
+        "examined": 17,
+        "eos": false,
+        "truncated": true,
+        "eos_route": null
+      },
+      "gamma2_token_count_ok": true,
+      "gamma4_cache_lengths_ok": true,
+      "gamma4_target_after_run": {
+        "max_abs_prob": 1.162213436600723e-09,
+        "max_total_variation": 1.1546260614281323e-09,
+        "same_argmax": 1.0
+      },
+      "gamma4_draft_after_run": {
+        "max_abs_prob": 2.384185791015625e-07,
+        "max_total_variation": 2.2633952312389738e-07,
+        "same_argmax": 1.0
+      },
+      "gamma4_run": {
+        "rounds": 4,
+        "proposed": 15,
+        "accepted": 11,
+        "examined": 12,
+        "eos": true,
+        "truncated": false,
+        "eos_route": "accepted"
+      },
+      "gamma4_token_count_ok": true,
+      "cap1_tokens": 1,
+      "cap1_proposed": 0,
+      "cap2_tokens": 2,
+      "cap2_proposed": 1,
+      "cap3_tokens": 3,
+      "cap3_proposed": 3,
+      "self_draft_accepted_over_examined": 1.0,
+      "self_draft_full_rounds": 4,
+      "self_draft_rounds": 4,
+      "forced_eos": {
+        "stopped": true,
+        "route": "bonus",
+        "end_token_only_at_end": true
+      }
+    },
+    {
+      "id": "SHORT-shifted-0000",
+      "split": "shifted",
+      "prompt_tokens": 57,
+      "target_split_block": {
+        "max_abs_prob": 0.004900455474853516,
+        "max_total_variation": 0.005877862684428692,
+        "same_argmax": 1.0
+      },
+      "target_split_single": {
+        "max_abs_prob": 0.001433640718460083,
+        "max_total_variation": 0.004077457822859287,
+        "same_argmax": 1.0
+      },
+      "target_rollback_length_ok": true,
+      "target_rollback_max_abs_prob": 0.0,
+      "target_no_rollback_max_abs_prob": 0.9983944892883301,
+      "draft_split_block": {
+        "max_abs_prob": 0.00453794002532959,
+        "max_total_variation": 0.00477658910676837,
+        "same_argmax": 1.0
+      },
+      "draft_split_single": {
+        "max_abs_prob": 0.009007155895233154,
+        "max_total_variation": 0.00903574749827385,
+        "same_argmax": 1.0
+      },
+      "draft_rollback_length_ok": true,
+      "draft_rollback_max_abs_prob": 0.0,
+      "draft_no_rollback_max_abs_prob": 0.9822822213172913,
+      "gamma1_cache_lengths_ok": true,
+      "gamma1_target_after_run": {
+        "max_abs_prob": 3.2022384743868315e-10,
+        "max_total_variation": 5.215721743390134e-10,
+        "same_argmax": 1.0
+      },
+      "gamma1_draft_after_run": {
+        "max_abs_prob": 2.253784714412177e-09,
+        "max_total_variation": 1.4033988193773439e-08,
+        "same_argmax": 1.0
+      },
+      "gamma1_run": {
+        "rounds": 1,
+        "proposed": 1,
+        "accepted": 1,
+        "examined": 1,
+        "eos": true,
+        "truncated": false,
+        "eos_route": "bonus"
+      },
+      "gamma1_token_count_ok": true,
+      "gamma2_cache_lengths_ok": true,
+      "gamma2_target_after_run": {
+        "max_abs_prob": 3.2022384743868315e-10,
+        "max_total_variation": 5.215721743390134e-10,
+        "same_argmax": 1.0
+      },
+      "gamma2_draft_after_run": {
+        "max_abs_prob": 1.1920928955078125e-07,
+        "max_total_variation": 8.624657965583538e-08,
+        "same_argmax": 1.0
+      },
+      "gamma2_run": {
+        "rounds": 1,
+        "proposed": 2,
+        "accepted": 1,
+        "examined": 2,
+        "eos": true,
+        "truncated": false,
+        "eos_route": "residual"
+      },
+      "gamma2_token_count_ok": true,
+      "gamma4_cache_lengths_ok": true,
+      "gamma4_target_after_run": {
+        "max_abs_prob": 1.6874110997378011e-09,
+        "max_total_variation": 1.1094118956833654e-09,
+        "same_argmax": 1.0
+      },
+      "gamma4_draft_after_run": {
+        "max_abs_prob": 1.1920928955078125e-07,
+        "max_total_variation": 8.226427894442168e-08,
+        "same_argmax": 1.0
+      },
+      "gamma4_run": {
+        "rounds": 1,
+        "proposed": 3,
+        "accepted": 3,
+        "examined": 3,
+        "eos": true,
+        "truncated": false,
+        "eos_route": "accepted"
+      },
+      "gamma4_token_count_ok": true,
+      "cap1_tokens": 1,
+      "cap1_proposed": 0,
+      "cap2_tokens": 2,
+      "cap2_proposed": 1,
+      "cap3_tokens": 3,
+      "cap3_proposed": 2,
+      "self_draft_accepted_over_examined": 1.0,
+      "self_draft_full_rounds": 1,
+      "self_draft_rounds": 1,
+      "forced_eos": {
+        "stopped": true,
+        "route": "residual",
+        "end_token_only_at_end": true
+      }
+    },
+    {
+      "id": "SHORT-shifted-0001",
+      "split": "shifted",
+      "prompt_tokens": 56,
+      "target_split_block": {
+        "max_abs_prob": 0.0017984509468078613,
+        "max_total_variation": 0.0028156968764960766,
+        "same_argmax": 1.0
+      },
+      "target_split_single": {
+        "max_abs_prob": 0.0028413236141204834,
+        "max_total_variation": 0.003936601337045431,
+        "same_argmax": 1.0
+      },
+      "target_rollback_length_ok": true,
+      "target_rollback_max_abs_prob": 0.0,
+      "target_no_rollback_max_abs_prob": 0.9999804496765137,
+      "draft_split_block": {
+        "max_abs_prob": 0.0008249580860137939,
+        "max_total_variation": 0.001907683676108718,
+        "same_argmax": 1.0
+      },
+      "draft_split_single": {
+        "max_abs_prob": 0.0007358789443969727,
+        "max_total_variation": 0.0015576340956613421,
+        "same_argmax": 1.0
+      },
+      "draft_rollback_length_ok": true,
+      "draft_rollback_max_abs_prob": 0.0,
+      "draft_no_rollback_max_abs_prob": 0.9362443089485168,
+      "gamma1_cache_lengths_ok": true,
+      "gamma1_target_after_run": {
+        "max_abs_prob": 1.0358689905842766e-08,
+        "max_total_variation": 6.537487884372695e-09,
+        "same_argmax": 1.0
+      },
+      "gamma1_draft_after_run": {
+        "max_abs_prob": 2.1457672119140625e-06,
+        "max_total_variation": 2.178568593080854e-06,
+        "same_argmax": 1.0
+      },
+      "gamma1_run": {
+        "rounds": 3,
+        "proposed": 3,
+        "accepted": 3,
+        "examined": 3,
+        "eos": true,
+        "truncated": false,
+        "eos_route": "accepted"
+      },
+      "gamma1_token_count_ok": true,
+      "gamma2_cache_lengths_ok": true,
+      "gamma2_target_after_run": {
+        "max_abs_prob": 1.0358689905842766e-08,
+        "max_total_variation": 6.537487884372695e-09,
+        "same_argmax": 1.0
+      },
+      "gamma2_draft_after_run": {
+        "max_abs_prob": 4.9567233872949146e-08,
+        "max_total_variation": 5.4107601954456186e-08,
+        "same_argmax": 1.0
+      },
+      "gamma2_run": {
+        "rounds": 2,
+        "proposed": 4,
+        "accepted": 4,
+        "examined": 4,
+        "eos": true,
+        "truncated": false,
+        "eos_route": "accepted"
+      },
+      "gamma2_token_count_ok": true,
+      "gamma4_cache_lengths_ok": true,
+      "gamma4_target_after_run": {
+        "max_abs_prob": 1.0198164090979844e-08,
+        "max_total_variation": 7.1212031826917155e-09,
+        "same_argmax": 1.0
+      },
+      "gamma4_draft_after_run": {
+        "max_abs_prob": 3.2915522751864046e-08,
+        "max_total_variation": 6.969137444912121e-08,
+        "same_argmax": 1.0
+      },
+      "gamma4_run": {
+        "rounds": 1,
+        "proposed": 4,
+        "accepted": 4,
+        "examined": 4,
+        "eos": true,
+        "truncated": false,
+        "eos_route": "bonus"
+      },
+      "gamma4_token_count_ok": true,
+      "cap1_tokens": 1,
+      "cap1_proposed": 0,
+      "cap2_tokens": 2,
+      "cap2_proposed": 1,
+      "cap3_tokens": 3,
+      "cap3_proposed": 2,
+      "self_draft_accepted_over_examined": 1.0,
+      "self_draft_full_rounds": 1,
+      "self_draft_rounds": 1,
+      "forced_eos": {
+        "stopped": true,
+        "route": "accepted",
+        "end_token_only_at_end": true
+      }
+    }
+  ],
+  "padding": [
+    {
+      "model": "target",
+      "prompts": 6,
+      "pad_width": 94,
+      "max_abs_prob": 0.0022639036178588867,
+      "max_total_variation": 0.002329294104129076,
+      "same_argmax": 1.0
+    },
+    {
+      "model": "draft",
+      "prompts": 6,
+      "pad_width": 94,
+      "max_abs_prob": 0.0008111000061035156,
+      "max_total_variation": 0.0008242882904596627,
+      "same_argmax": 1.0
+    }
+  ],
+  "batched_sampling_ok": true
+}

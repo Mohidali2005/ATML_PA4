@@ -1,0 +1,46 @@
+{
+  "prompts": 6,
+  "padding": [
+    {
+      "model": "target",
+      "prompts": 6,
+      "pad_width": 94,
+      "max_abs_prob": 0.0022639036178588867,
+      "max_total_variation": 0.002329294104129076,
+      "same_argmax": 1.0
+    },
+    {
+      "model": "draft",
+      "prompts": 6,
+      "pad_width": 94,
+      "max_abs_prob": 0.0008111000061035156,
+      "max_total_variation": 0.0008242882904596627,
+      "same_argmax": 1.0
+    }
+  ],
+  "batched_sampling_ok": true,
+  "target_split_block_max_tv": 0.005877862684428692,
+  "target_split_block_same_argmax": 1.0,
+  "target_split_single_max_tv": 0.004077457822859287,
+  "target_split_single_same_argmax": 1.0,
+  "target_rollback_max_abs_prob": 0.0,
+  "target_no_rollback_max_abs_prob": 0.9999804496765137,
+  "draft_split_block_max_tv": 0.00477658910676837,
+  "draft_split_block_same_argmax": 1.0,
+  "draft_split_single_max_tv": 0.00903574749827385,
+  "draft_split_single_same_argmax": 1.0,
+  "draft_rollback_max_abs_prob": 0.0,
+  "draft_no_rollback_max_abs_prob": 0.9822822213172913,
+  "gamma1_max_tv_after_run": 0.0010132718598470092,
+  "gamma1_cache_lengths_ok": true,
+  "gamma1_token_count_ok": true,
+  "gamma2_max_tv_after_run": 0.0011141601717099547,
+  "gamma2_cache_lengths_ok": true,
+  "gamma2_token_count_ok": true,
+  "gamma4_max_tv_after_run": 0.003721152897924185,
+  "gamma4_cache_lengths_ok": true,
+  "gamma4_token_count_ok": true,
+  "cap_tokens_ok": true,
+  "self_draft_acceptance": 1.0,
+  "forced_eos_stopped": true
+}

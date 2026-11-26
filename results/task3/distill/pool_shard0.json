@@ -1,0 +1,14 @@
+{
+  "load_seconds": 4.742958369999997,
+  "peak_gb": 3.11522816,
+  "math": {
+    "responses": 250,
+    "tokens": 44925,
+    "seconds": 1648.0182712570002
+  },
+  "short": {
+    "responses": 150,
+    "tokens": 2185,
+    "seconds": 84.45621094300031
+  }
+}

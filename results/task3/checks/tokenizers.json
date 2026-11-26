@@ -1,0 +1,13 @@
+{
+  "prompts": 920,
+  "plain_token_ids_equal": 920,
+  "chat_token_ids_equal": 920,
+  "chat_template_equal": true,
+  "vocab_equal": true,
+  "eos_token": "<|im_end|>",
+  "eos_token_id": 151645,
+  "draft_eos_token_id": 151645,
+  "tokenizer_vocab": 151665,
+  "max_prompt_tokens": 187,
+  "min_prompt_tokens": 47
+}

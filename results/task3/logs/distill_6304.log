@@ -1,0 +1,36 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1795640821.678849     353 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+off_6304 update 10 kl 0.1809 norm 0.61 time 13 s
+off_6304 update 20 kl 0.0960 norm 0.45 time 27 s
+off_6304 update 30 kl 0.1198 norm 0.52 time 41 s
+off_6304 update 40 kl 0.1414 norm 1.05 time 55 s
+off_6304 update 50 kl 0.1156 norm 0.50 time 70 s
+off_6304 update 60 kl 0.0826 norm 0.40 time 84 s
+off_6304 update 70 kl 0.0824 norm 0.45 time 97 s
+off_6304 update 80 kl 0.0874 norm 0.41 time 110 s
+off_6304 update 90 kl 0.1398 norm 0.77 time 125 s
+off_6304 update 100 kl 0.0773 norm 0.43 time 139 s
+off_6304 update 110 kl 0.0856 norm 0.37 time 154 s
+off_6304 update 120 kl 0.0559 norm 0.31 time 168 s
+off_6304 update 130 kl 0.0905 norm 0.49 time 183 s
+off_6304 update 140 kl 0.0722 norm 0.34 time 196 s
+off_6304 update 150 kl 0.0894 norm 0.48 time 209 s
+off_6304 update 157 kl 0.1313 norm 1.04 time 219 s
+off_6304 finished with 157 updates 0 skipped 219 s
+on_6304 update 10 kl 0.3653 norm 1.02 time 143 s
+on_6304 update 20 kl 0.2455 norm 0.80 time 280 s
+on_6304 update 30 kl 0.2947 norm 0.91 time 411 s
+on_6304 update 40 kl 0.2096 norm 0.60 time 544 s
+on_6304 update 50 kl 0.2689 norm 0.81 time 673 s
+on_6304 update 60 kl 0.1138 norm 0.50 time 812 s
+on_6304 update 70 kl 0.2244 norm 0.61 time 946 s
+on_6304 update 80 kl 0.1527 norm 0.60 time 1083 s
+on_6304 update 90 kl 0.2018 norm 0.60 time 1215 s
+on_6304 update 100 kl 0.2017 norm 0.50 time 1347 s
+on_6304 update 110 kl 0.2632 norm 0.74 time 1481 s
+on_6304 update 120 kl 0.2581 norm 0.57 time 1613 s
+on_6304 update 130 kl 0.1370 norm 0.57 time 1751 s
+on_6304 update 140 kl 0.0920 norm 0.40 time 1882 s
+on_6304 update 150 kl 0.1238 norm 0.37 time 2022 s
+on_6304 update 157 kl 0.2077 norm 1.22 time 2103 s
+on_6304 finished with 157 updates 0 skipped 2103 s

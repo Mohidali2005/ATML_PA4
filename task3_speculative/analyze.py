@@ -202,7 +202,11 @@ def alignment_part(cfg,res,figs,tables):
                 vals = np.array([[t64[(t64["split"] == split)&(t64["bank"] == b)&(t64["draft"] == d)][m].iloc[0] for b in banks]
                                  for d in names])
                 x = np.arange(len(banks))+0.27*(k-1)
-                ax.bar(x,vals.mean(0),0.25,color=COLOR[meth],label=LABEL[meth])
+                # drawing acceptance as points so a zoomed axis does not cut any bar
+                if i == 0:
+                    ax.bar(x,vals.mean(0),0.25,color=COLOR[meth],label=LABEL[meth])
+                else:
+                    ax.plot(x,vals.mean(0),"o",color=COLOR[meth],ms=6,label=LABEL[meth])
                 if len(names) > 1:
                     for v in vals:
                         ax.plot(x,v,".",color="black",ms=3)
@@ -210,7 +214,8 @@ def alignment_part(cfg,res,figs,tables):
             ax.set_xticks(range(len(banks)))
             ax.set_xticklabels([BANK_LABEL[b] for b in banks],rotation=40,ha="right",fontsize=8)
             if i == 1:
-                ax.set_ylim(0,1)
+                ax.grid(axis="y",color="lightgray",lw=0.5)
+                ax.set_axisbelow(True)
             if j == 0:
                 ax.set_ylabel(name)
     fig.tight_layout(rect=(0,0.04,1,1))
@@ -485,7 +490,10 @@ def speed_figure(cfg,figs,spec,rounds,model,expected):
     for k,g in enumerate(gammas):
         for d in DRAFTS:
             q = m[(m["gamma"] == g)&(m["draft"] == d)].iloc[0]
-            ax.plot(q["projected_speedup"],q["measured_decode_speedup"],"os"[k],color=COLOR[method_of(d)],ms=6,
+            # drawing trained drafts hollow so the original draft stays visible underneath
+            face = COLOR["original"] if d == "original" else "none"
+            ax.plot(q["projected_speedup"],q["measured_decode_speedup"],"os"[k],color=COLOR[method_of(d)],ms=7,
+                    markerfacecolor=face,markeredgewidth=1.4,
                     label=f"{LABEL[method_of(d)]}, γ = {g}" if d in ("original","off_6304","on_6304") else None)
     lim = [0.95*min(m["projected_speedup"].min(),m["measured_decode_speedup"].min()),
            1.05*max(m["projected_speedup"].max(),m["measured_decode_speedup"].max())]
@@ -493,8 +501,8 @@ def speed_figure(cfg,figs,spec,rounds,model,expected):
     ax.set_xlabel("projected speedup")
     ax.set_ylabel("measured decode speedup")
     ax.set_title("(d) cost model",fontsize=10)
-    ax.legend(loc="upper center",bbox_to_anchor=(0.5,-0.2),ncol=2,frameon=False,fontsize=7)
-    fig.tight_layout()
+    ax.legend(loc="upper center",bbox_to_anchor=(0.5,-0.27),ncol=2,frameon=False,fontsize=7)
+    fig.tight_layout(w_pad=3)
     save(fig,figs/"speculative_speed.png")
     fig,axes = plt.subplots(1,2,figsize=(8.4,3.3))
     e = expected[expected["split"] != "all"]
@@ -567,13 +575,16 @@ def quality_part(cfg,res,tables):
     pd.DataFrame(rows).to_csv(tables/"quality.csv",index=False)
     out = []
     models = ["original"]+list(STUDENTS)
+    # pairing short form answers on content as well since exact match mostly reflects the reply format
     for split in SPLITS:
-        wide = q[q["split"] == split].groupby(["prompt_id","model"])["correct"].mean().unstack()
-        for a,b in ([(s,"original") for s in STUDENTS]+[(m,"target") for m in models]+
-                    [(f"on_{s}",f"off_{s}") for s in cfg["distill"]["seeds"]]):
-            d = (wide[a]-wide[b]).to_numpy(float)
-            bo = d[boot_indices(len(d),n_boot,seed)].mean(1)
-            out.append({"split":split,"first":a,"second":b,"diff":d.mean(),"lo":np.percentile(bo,2.5),"hi":np.percentile(bo,97.5)})
+        for metric in (("correct",) if split == "math" else ("correct","contains_answer")):
+            wide = q[q["split"] == split].assign(v=lambda t:t[metric].astype(float)).groupby(["prompt_id","model"])["v"].mean().unstack()
+            for a,b in ([(s,"original") for s in STUDENTS]+[(m,"target") for m in models]+
+                        [(f"on_{s}",f"off_{s}") for s in cfg["distill"]["seeds"]]):
+                d = (wide[a]-wide[b]).to_numpy(float)
+                bo = d[boot_indices(len(d),n_boot,seed)].mean(1)
+                out.append({"split":split,"metric":metric,"first":a,"second":b,"diff":d.mean(),
+                            "lo":np.percentile(bo,2.5),"hi":np.percentile(bo,97.5)})
     pd.DataFrame(out).to_csv(tables/"quality_pairs.csv",index=False)
 
 

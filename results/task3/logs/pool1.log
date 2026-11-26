@@ -1,0 +1,4 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1795637700.555694     329 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+pool math {'responses': 250, 'tokens': 45595, 'seconds': 1674.64912603}
+pool short {'responses': 150, 'tokens': 2133, 'seconds': 82.76666994100015}

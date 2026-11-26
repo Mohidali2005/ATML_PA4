@@ -1,0 +1,53 @@
+{
+  "name": "on_6304",
+  "method": "on",
+  "seed": 6304,
+  "updates": 157,
+  "skipped_updates": 0,
+  "scored_tokens": {
+    "math": 30000,
+    "short": 10000
+  },
+  "wall_seconds": 2103.0865872309996,
+  "seconds": {
+    "rollout": 1890.9011189050218,
+    "teacher_scoring": 40.07952229500003,
+    "forward_backward": 170.88843126101978,
+    "optimizer": 1.1059869049936533
+  },
+  "responses": {
+    "math": {
+      "presentations": 165,
+      "unique_prompts": 165,
+      "mean_response_length": 182.4,
+      "ended_with_eos": 0.18787878787878787,
+      "quota_truncated": 1,
+      "generated_tokens": 30096,
+      "tokens_carried_over": 13357
+    },
+    "short": {
+      "presentations": 649,
+      "unique_prompts": 300,
+      "mean_response_length": 15.411402157164868,
+      "ended_with_eos": 0.7149460708782742,
+      "quota_truncated": 1,
+      "generated_tokens": 10002,
+      "tokens_carried_over": 1901
+    }
+  },
+  "backbone_parameters": 494032768,
+  "adapter_parameters": 1081344,
+  "lora_init": {
+    "a_sum": 14.670488499145804,
+    "a_abs_sum": 11494.941371436933,
+    "b_abs_sum": 0.0
+  },
+  "lora_final": {
+    "a_sum": 18.75669897838753,
+    "a_abs_sum": 11672.606374492583,
+    "b_abs_sum": 1148.8218033461972
+  },
+  "first_kl": 0.3141746148467064,
+  "last_kl": 0.20773489028215408,
+  "peak_gb": 5.36918016
+}

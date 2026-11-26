@@ -1,0 +1,824 @@
+[
+  {
+    "split": "math",
+    "rule": "off_policy_closer",
+    "prompt_id": "GSM8K-0051",
+    "position": 15,
+    "question": "Bobby takes a 30 min lunch and 2 15 minutes break per day at the office.  After 5 days, how many hours do his lunches and breaks add up to?",
+    "prefix_end": "To calculate the total hours that Bobby's lunch and break time add up",
+    "next_teacher_token": " to",
+    "models": {
+      "target": {
+        "tv": null,
+        "top": [
+          [
+            " to",
+            0.9914
+          ],
+          [
+            " over",
+            0.0078
+          ],
+          [
+            " in",
+            0.0002
+          ],
+          [
+            " after",
+            0.0002
+          ]
+        ]
+      },
+      "original": {
+        "tv": 0.0964131,
+        "top": [
+          [
+            " to",
+            0.895
+          ],
+          [
+            " over",
+            0.0846
+          ],
+          [
+            " for",
+            0.0096
+          ],
+          [
+            " after",
+            0.0081
+          ]
+        ]
+      },
+      "off_6304": {
+        "tv": 0.0771649,
+        "top": [
+          [
+            " to",
+            0.9153
+          ],
+          [
+            " over",
+            0.05
+          ],
+          [
+            " for",
+            0.0184
+          ],
+          [
+            " after",
+            0.0091
+          ]
+        ]
+      },
+      "off_6305": {
+        "tv": 0.151488,
+        "top": [
+          [
+            " to",
+            0.8398
+          ],
+          [
+            " over",
+            0.0832
+          ],
+          [
+            " after",
+            0.0341
+          ],
+          [
+            " for",
+            0.0306
+          ]
+        ]
+      },
+      "on_6304": {
+        "tv": 0.3549682,
+        "top": [
+          [
+            " to",
+            0.6298
+          ],
+          [
+            " over",
+            0.1982
+          ],
+          [
+            " after",
+            0.0813
+          ],
+          [
+            " for",
+            0.0614
+          ]
+        ]
+      },
+      "on_6305": {
+        "tv": 0.345964,
+        "top": [
+          [
+            " to",
+            0.6419
+          ],
+          [
+            " over",
+            0.2362
+          ],
+          [
+            " for",
+            0.0519
+          ],
+          [
+            " after",
+            0.0487
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "split": "math",
+    "rule": "on_policy_closer",
+    "prompt_id": "GSM8K-0047",
+    "position": 81,
+    "question": "John picks 4 bananas on Wednesday. Then he picks 6 bananas on Thursday. On Friday, he picks triple the number of bananas he did on Wednesday. How many bananas does John have?",
+    "prefix_end": "12\\) bananas.\n\nTherefore, the total number of bananas John picks is:\n\n\\(4 + 6 + 12 = 22\\) bananas.\n\nSo, John has 22 bananas",
+    "next_teacher_token": " in",
+    "models": {
+      "target": {
+        "tv": null,
+        "top": [
+          [
+            " in",
+            0.6979
+          ],
+          [
+            ".",
+            0.2909
+          ],
+          [
+            " altogether",
+            0.0055
+          ],
+          [
+            " after",
+            0.002
+          ]
+        ]
+      },
+      "original": {
+        "tv": 0.3736885,
+        "top": [
+          [
+            ".",
+            0.6064
+          ],
+          [
+            " in",
+            0.3297
+          ],
+          [
+            " by",
+            0.0254
+          ],
+          [
+            " on",
+            0.0154
+          ]
+        ]
+      },
+      "off_6304": {
+        "tv": 0.5069965,
+        "top": [
+          [
+            ".",
+            0.7658
+          ],
+          [
+            " in",
+            0.1967
+          ],
+          [
+            " on",
+            0.0069
+          ],
+          [
+            " by",
+            0.0047
+          ]
+        ]
+      },
+      "off_6305": {
+        "tv": 0.4581141,
+        "top": [
+          [
+            ".",
+            0.6853
+          ],
+          [
+            " in",
+            0.2444
+          ],
+          [
+            " on",
+            0.018
+          ],
+          [
+            " by",
+            0.0161
+          ]
+        ]
+      },
+      "on_6304": {
+        "tv": 0.2280739,
+        "top": [
+          [
+            " in",
+            0.4743
+          ],
+          [
+            ".",
+            0.4455
+          ],
+          [
+            " by",
+            0.0285
+          ],
+          [
+            " on",
+            0.0145
+          ]
+        ]
+      },
+      "on_6305": {
+        "tv": 0.4543335,
+        "top": [
+          [
+            ".",
+            0.697
+          ],
+          [
+            " in",
+            0.2485
+          ],
+          [
+            " on",
+            0.0164
+          ],
+          [
+            " by",
+            0.0089
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "split": "familiar",
+    "rule": "off_policy_closer",
+    "prompt_id": "SHORT-familiar-0013",
+    "position": 53,
+    "question": "Invoice: purchased 3446 crates and paid by transfer. How many crates were purchased? Give the integer.",
+    "prefix_end": " the information provided:\n\n1. \"Invoice: purchased 3446 crates and paid by transfer.\"\n2. The phrase \"purchased\" indicates that crates were acquired, and the quantity is the",
+    "next_teacher_token": " number",
+    "models": {
+      "target": {
+        "tv": null,
+        "top": [
+          [
+            " number",
+            0.6722
+          ],
+          [
+            " total",
+            0.1867
+          ],
+          [
+            " amount",
+            0.0351
+          ],
+          [
+            " same",
+            0.0269
+          ]
+        ]
+      },
+      "original": {
+        "tv": 0.2867621,
+        "top": [
+          [
+            " number",
+            0.4043
+          ],
+          [
+            " total",
+            0.194
+          ],
+          [
+            " amount",
+            0.0874
+          ],
+          [
+            " same",
+            0.0692
+          ]
+        ]
+      },
+      "off_6304": {
+        "tv": 0.1433057,
+        "top": [
+          [
+            " number",
+            0.6793
+          ],
+          [
+            " total",
+            0.0705
+          ],
+          [
+            " same",
+            0.0584
+          ],
+          [
+            " amount",
+            0.0508
+          ]
+        ]
+      },
+      "off_6305": {
+        "tv": 0.249662,
+        "top": [
+          [
+            " number",
+            0.5781
+          ],
+          [
+            " same",
+            0.1175
+          ],
+          [
+            " amount",
+            0.0609
+          ],
+          [
+            " total",
+            0.0555
+          ]
+        ]
+      },
+      "on_6304": {
+        "tv": 0.3883251,
+        "top": [
+          [
+            " number",
+            0.3479
+          ],
+          [
+            " total",
+            0.1384
+          ],
+          [
+            " same",
+            0.1095
+          ],
+          [
+            " amount",
+            0.0788
+          ]
+        ]
+      },
+      "on_6305": {
+        "tv": 0.3656045,
+        "top": [
+          [
+            " number",
+            0.3975
+          ],
+          [
+            " same",
+            0.1331
+          ],
+          [
+            " total",
+            0.1139
+          ],
+          [
+            " amount",
+            0.0915
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "split": "familiar",
+    "rule": "on_policy_closer",
+    "prompt_id": "SHORT-familiar-0004",
+    "position": 34,
+    "question": "Invoice: purchased 3761 crates and paid by transfer. How many crates were purchased? Give the integer.",
+    "prefix_end": "The invoice states that 3761 crates were purchased and payment was made by transfer. Therefore, the number of crates purchased is 3761.",
+    "next_teacher_token": "<|im_end|>",
+    "models": {
+      "target": {
+        "tv": null,
+        "top": [
+          [
+            "<|im_end|>",
+            0.848
+          ],
+          [
+            " Since",
+            0.0777
+          ],
+          [
+            " This",
+            0.0378
+          ],
+          [
+            " The",
+            0.0158
+          ]
+        ]
+      },
+      "original": {
+        "tv": 0.0937929,
+        "top": [
+          [
+            "<|im_end|>",
+            0.8606
+          ],
+          [
+            " The",
+            0.0449
+          ],
+          [
+            " \n\n",
+            0.0378
+          ],
+          [
+            " This",
+            0.0189
+          ]
+        ]
+      },
+      "off_6304": {
+        "tv": 0.4779868,
+        "top": [
+          [
+            " Since",
+            0.3954
+          ],
+          [
+            "<|im_end|>",
+            0.3714
+          ],
+          [
+            " The",
+            0.0803
+          ],
+          [
+            " This",
+            0.0767
+          ]
+        ]
+      },
+      "off_6305": {
+        "tv": 0.4248326,
+        "top": [
+          [
+            "<|im_end|>",
+            0.4245
+          ],
+          [
+            " Since",
+            0.3464
+          ],
+          [
+            " This",
+            0.0773
+          ],
+          [
+            " The",
+            0.0738
+          ]
+        ]
+      },
+      "on_6304": {
+        "tv": 0.2010552,
+        "top": [
+          [
+            "<|im_end|>",
+            0.6476
+          ],
+          [
+            " Since",
+            0.1771
+          ],
+          [
+            " The",
+            0.0548
+          ],
+          [
+            " This",
+            0.0532
+          ]
+        ]
+      },
+      "on_6305": {
+        "tv": 0.1988362,
+        "top": [
+          [
+            "<|im_end|>",
+            0.6506
+          ],
+          [
+            " Since",
+            0.1645
+          ],
+          [
+            " The",
+            0.0777
+          ],
+          [
+            " This",
+            0.0436
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "split": "shifted",
+    "rule": "off_policy_closer",
+    "prompt_id": "SHORT-shifted-0029",
+    "position": 9,
+    "question": "Entry country_code=FR; timestamp=2022. Extract the two-letter code only.",
+    "prefix_end": "The two-letter country code for France (",
+    "next_teacher_token": "FR",
+    "models": {
+      "target": {
+        "tv": null,
+        "top": [
+          [
+            "FR",
+            0.9899
+          ],
+          [
+            "entry",
+            0.0052
+          ],
+          [
+            "country",
+            0.0022
+          ],
+          [
+            "Entry",
+            0.0011
+          ]
+        ]
+      },
+      "original": {
+        "tv": 0.2664348,
+        "top": [
+          [
+            "FR",
+            0.7316
+          ],
+          [
+            "France",
+            0.0629
+          ],
+          [
+            "code",
+            0.0601
+          ],
+          [
+            "entry",
+            0.0243
+          ]
+        ]
+      },
+      "off_6304": {
+        "tv": 0.3833336,
+        "top": [
+          [
+            "FR",
+            0.6074
+          ],
+          [
+            "entry",
+            0.142
+          ],
+          [
+            "code",
+            0.0601
+          ],
+          [
+            "Entry",
+            0.0514
+          ]
+        ]
+      },
+      "off_6305": {
+        "tv": 0.3907503,
+        "top": [
+          [
+            "FR",
+            0.6013
+          ],
+          [
+            "entry",
+            0.1384
+          ],
+          [
+            "code",
+            0.0586
+          ],
+          [
+            "Entry",
+            0.0329
+          ]
+        ]
+      },
+      "on_6304": {
+        "tv": 0.6119702,
+        "top": [
+          [
+            "FR",
+            0.3839
+          ],
+          [
+            "entry",
+            0.173
+          ],
+          [
+            "Entry",
+            0.1704
+          ],
+          [
+            "code",
+            0.038
+          ]
+        ]
+      },
+      "on_6305": {
+        "tv": 0.3668965,
+        "top": [
+          [
+            "FR",
+            0.6238
+          ],
+          [
+            "entry",
+            0.1328
+          ],
+          [
+            "Entry",
+            0.0452
+          ],
+          [
+            "France",
+            0.0311
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "split": "shifted",
+    "rule": "on_policy_closer",
+    "prompt_id": "SHORT-shifted-0002",
+    "position": 52,
+    "question": "Entry country_code=DE; timestamp=2021. Extract the two-letter code only.",
+    "prefix_end": ", we can use string splitting. In this case, the country code is located within the `country_code` field. Here's how you can do it in Python:\n\n```python\nentry = \"",
+    "next_teacher_token": "Entry",
+    "models": {
+      "target": {
+        "tv": null,
+        "top": [
+          [
+            "Entry",
+            0.993
+          ],
+          [
+            "entry",
+            0.0032
+          ],
+          [
+            "DE",
+            0.0032
+          ],
+          [
+            "country",
+            0.0002
+          ]
+        ]
+      },
+      "original": {
+        "tv": 0.0928179,
+        "top": [
+          [
+            "Entry",
+            0.9003
+          ],
+          [
+            "DE",
+            0.0594
+          ],
+          [
+            "Country",
+            0.0053
+          ],
+          [
+            "De",
+            0.0048
+          ]
+        ]
+      },
+      "off_6304": {
+        "tv": 0.1865684,
+        "top": [
+          [
+            "Entry",
+            0.8014
+          ],
+          [
+            "DE",
+            0.1654
+          ],
+          [
+            "Country",
+            0.008
+          ],
+          [
+            "De",
+            0.0043
+          ]
+        ]
+      },
+      "off_6305": {
+        "tv": 0.1636038,
+        "top": [
+          [
+            "Entry",
+            0.8287
+          ],
+          [
+            "DE",
+            0.144
+          ],
+          [
+            "Country",
+            0.0067
+          ],
+          [
+            "De",
+            0.004
+          ]
+        ]
+      },
+      "on_6304": {
+        "tv": 0.021623,
+        "top": [
+          [
+            "Entry",
+            0.9737
+          ],
+          [
+            "DE",
+            0.0184
+          ],
+          [
+            "De",
+            0.0013
+          ],
+          [
+            "Country",
+            0.0011
+          ]
+        ]
+      },
+      "on_6305": {
+        "tv": 0.1618109,
+        "top": [
+          [
+            "Entry",
+            0.8332
+          ],
+          [
+            "DE",
+            0.1238
+          ],
+          [
+            "Country",
+            0.0076
+          ],
+          [
+            "De",
+            0.0054
+          ]
+        ]
+      }
+    }
+  }
+]

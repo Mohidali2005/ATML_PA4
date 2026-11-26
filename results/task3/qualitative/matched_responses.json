@@ -1,0 +1,170 @@
+[
+  {
+    "split": "math",
+    "rule": "first_prompt",
+    "prompt_id": "GSM8K-0000",
+    "gold": "18",
+    "responses": {
+      "target": {
+        "text": "To determine how much Janet makes in dollars every day at the farmers' market, we need to calculate the difference between the total number of eggs laid per day and the number of eggs she eats or uses to bake muffins, and then find out how much she sells the remaining eggs for.\n\n1. Calculate the total number of eggs laid per day by the ducks:\n   \\[\n   16 \\text{ eggs/day}\n   \\]\n\n2. Determine the number of eggs Janet eats for breakfast:\n   \\[\n   3 \\text{ eggs/day}\n   \\]\n\n3. Determine the number of eggs Janet uses to bake muffins:\n   \\[\n   4 \\text{ eggs/day}\n   \\]\n\n4. Calculate the number of eggs left for sale at the farmers' market each day:\n   \\[\n   16 \\text{ eggs/day} - 3 \\text{ eggs/day} - 4 \\text{ eggs/day} = 9 \\text{ eggs/day}\n   \\]\n\n5. Calculate how much Janet makes from selling these 9 eggs at $2 per egg:\n   \\[\n   9 \\text{ eggs} \\times 2 \\text{ dollars/egg} = 18 \\text{ dollars/day}\n   \\]\n\nTherefore, Janet makes \\(\\boxed{18}\\) dollars every day at the farmers' market.",
+        "correct": true
+      },
+      "original": {
+        "text": "To determine how much money Janet makes every day at the farmers' market, we need to calculate the total number of eggs she and her ducks lay in a day and then determine how much money she can make from selling those eggs for two days.\n\nFirst, let's calculate the total number of eggs laid by the ducks in a day. Janet's ducks lay 16 eggs per day.\n\nNext, let's calculate the total number of eggs consumed every day by Janet. Janet eats 3 eggs for breakfast every morning and bakes 4 muffins for her friends, so she eats \\(3 + 4 = 7\\) eggs.\n\nThen, we add the eggs consumed to the eggs laid by the ducks to get the total number of eggs laid:\n\n\\[\n16 \\text{ (eggs from ducks)} + 7 \\text{ (eggs eaten)} = 23 \\text{ (total eggs laid)}\n\\]\n\nAfter calculating the total number of eggs laid, we need to calculate how much money Janet can make from selling the eggs. Janet sells each egg for $2.\n\nNow, we find out how much money Janet makes in total by calculating two days' worth of sales:\n\n\\[\n23 \\text{ (total eggs laid)} \\times 2 \\text{ (selling price per egg)} = 46 \\text{ (dollars}}\n\\]\n\nSo, Janet makes \\(\\boxed{46}\\) dollars every day at the farmers' market.",
+        "correct": false
+      },
+      "off_6304": {
+        "text": "To determine how much Janet makes in dollars every day at the farmers' market, we need to consider her daily egg production, her daily activities, and her profits from selling the eggs.\n\n1. Calculate the total number of eggs Janet lays in a day.\n   Janet lays 16 eggs per day.\n\n2. Calculate the number of eggs the ducks consume in a day.\n   She eats 3 eggs for breakfast every morning.\n   Therefore, she eats 3 eggs daily.\n\n3. Calculate the number of eggs she bakes daily.\n   She bakes 4 muffins in a day.\n   Therefore, she bakes 4 eggs daily.\n\n4. Calculate the total number of eggs she sells in a day.\n   The remainder of eggs are sold daily for $2.\n   Therefore, each day, she sells \\(16 - 3 - 4 = 7\\) eggs (since 16 - 3 = 13 and she bakes 4 muffins which provide 2 eggs each, but since racket, it's less). However, with strategic timing, she can move the total eggs between sales and bakery with more accurate calculation for actual basis.\n\n5. Calculate her daily earnings.\n   She sells 7 eggs per day at a $2 per egg rate.\n   Therefore, her daily earnings are \\(7 \\times \\text{price per egg}\\).\n\nSo in essence:\n\\[ \\text{Daily earnings} = \\text{return} [7 \\times \\$2 = \\$14] \\]\n\nIn this context, the question's objectives would genuinely lend more distinct breakdown to relationship adjustments, but further range change acctuarative distribution beyond pinpoint detail, expected, Janet makes \\boxed{\\$14 } in dollars every day at farmers' market.",
+        "correct": false
+      },
+      "on_6304": {
+        "text": "To determine how much money Janet makes every day at the farmers' market, we need to calculate the net earnings from the eggs and muffins she sells.\n\nFirst, let's find out how many eggs are produced each day. Janet's ducks lay 16 eggs per day.\n\nNext, we need to account for her consumption:\n- She eats 3 eggs for breakfast.\n- She eats 4 muffins.\n\nTo determine the number of eggs she eats each day, we add together the breakfast and muffins:\n\\[ 3 \\text{ eggs (breakfast)} + 4 \\text{ eggs (muffins)} = 7 \\text{ eggs per day} \\]\n\nThe number of eggs used each day is:\n\\[ 16 \\text{ eggs (total)} - 7 \\text{ eggs (freshly laid)} = 9 \\text{ eggs per day} \\]\n\nNext, we consider the selling price at the farmers' market for a fresh egg:\n\\[ 10 \\text{ USD per racket, where a dozen is 10} \\]\n\\[ 9 \\text{ eggs per day} \\]\n\nTherefore, the total income from selling 9 eggs is expressed per day:\n\\[ 9 \\times 10 = 90 \\text{ USD per day} \\]\n\nJanet sells eggs to her friends at the farmers' market; in essence:\n\\[ \\text{Fresh eggs sold} = \\frac{10}{10} = \\$0.75 \\, per kg = 75 \\times \\frac{0.75}{2} = 75 \\, USD \\]\n\nSince she sells 16 eggs a day because she consumes 3 from breakfast and 4 muffins, the potential overall revenue per day is spent:\n\\[ 16 \\times \\$0.75 = 12 \\times 250 = \\$30.875 \\]\n\nThus, the total daily earnings from selling eggs at the farmers' market figure out to be:\n\\[ \\$30.875 \\]\n\nFinally, we must express the revenue per day through consideration for domain discrepancies in the problem context. The result from selling eggs (revenue) deserves calculation, entirely elsing with calculations to negative figures, which contradicts relevant أجersistence extreme response.') from interest.\n\nTherefore, conclusively:\n\\[ 30.875 \\]",
+        "correct": false
+      }
+    }
+  },
+  {
+    "split": "math",
+    "rule": "original_right_student_wrong",
+    "prompt_id": "GSM8K-0006",
+    "gold": "40",
+    "responses": {
+      "target": {
+        "text": "To determine how many girls are not in the girl scout, we need to follow these steps:\n\n1. Calculate the number of boys and girls.\n2. Determine how many girls are in the girl scout.\n3. Subtract the number of girls in the girl scout from the total number of girls to find how many are not in the girl scout.\n\nFirst, we calculate the number of boys:\nThe total number of students is 200, and 2/5 of them are boys.\n\\[ 200 \\times \\frac{2}{5} = 80 \\]\nSo, there are 80 boys.\n\nNext, we calculate the number of girls:\n\\[ 200 - 80 = 120 \\]\nSo, there are 120 girls.\n\nNow, we determine how many of these girls are in the girl scout:\n\\[ 120 \\times \\frac{2}{3} = 80 \\]\nSo, 80 girls are in the girl scout.\n\nFinally, we find out how many girls are not in the girl scout:\n\\[ 120 - 80 = 40 \\]\nSo, the number of girls who are not in the girl scout is \\boxed{40}.",
+        "correct": true
+      },
+      "original": {
+        "text": "To determine how many girls are not in the girl scout, we need to follow these steps:\n\n1. Calculate the number of boys and girls.\n2. Determine how many girls are in the girl scout.\n3. Subtract the number of girls in the girl scout from the total number of girls.\n\nLet's start with the first step:\n\n1. The total number of students in Grade 5 is 200. According to the problem, 2/5 of these students are boys. So, we calculate the number of boys as follows:\n   \\[\n   \\text{Number of boys} = \\frac{2}{5} \\times 200 = 80\n   \\]\n   Since the total number of students in the entire school is 200, the number of girls is:\n   \\[\n   \\text{Number of girls} = 200 - 80 = 120\n   \\]\n\n2. Next, we need to determine how many of the girls are in the girl scout. The problem states that 2/3 of the girls are in the girl scout. Therefore, we calculate the number of girls in the girl scout as follows:\n   \\[\n   \\text{Number of girls in the girl scout} = \\frac{2}{3} \\times 120 = 80\n   \\]\n\n3. Finally, we find out how many girls are not in the girl scout by subtracting the number of girls in the girl scout from the total number of girls:\n   \\[\n   \\text{Number of girls not in the girl scout} = 120 - 80 = 40\n   \\]\n\nThus, the number of girls not in the girl scout is \\boxed{40}.",
+        "correct": true
+      },
+      "off_6304": {
+        "text": "To determine how many girls are not in the girl scout, we need to follow these steps:\n\n1. Calculate the number of boys and girls.\n2. Calculate the number of girls who are in the girl scout.\n3. Subtract the number of girls in the girl scout from the total number of girls.\n\nLet's start with the first step:\n\n1. The total number of students is 200 Grade 5 students.\n2. The number of boys is given as \\( \\frac{2}{5} \\) of the total number of students.\n   \\[\n   \\text{Number of boys} = \\frac{2}{5} \\times 200 = 80\n   \\]\n3. The number of girls is the total number of students minus the number of boys.\n   \\[\n   \\text{Number of girls} = 200 - 80 = 120\n   \\]\n4. The number of girls who are in the girl scout is given as \\( \\frac{2}{3} \\) of the total number of girls.\n   \\[\n   \\text{Number of girls not in the girl scout} = \\frac{2}{3} \\times 120 = 80\n   \\]\n\nTherefore, the number of girls who are not in the girl scout is \\(\\boxed{80}\\).",
+        "correct": false
+      },
+      "on_6304": {
+        "text": "To determine how many girls are not in the girl scout, we need to follow these steps:\n\n1. Calculate the number of boys out of the 200 Grade 5 students.\n2. Determine the number of girls on the perimeter (the girls who do not necessarily go to the girl scout).\n3. Subtract the number of girls not in the girl scout from the total number of girls.\n\nFirst, let's find out how many boys there are. Since there are 2/5 of 200 Grade 5 students who are boys:\n\n\\[ \\text{Number of boys} = \\frac{2}{5} \\times 200 = \\frac{400}{5} = 80 \\]\n\nNext, we need to find out how many girls there are in total. Since there are twice as many girls as boys because 2/3 of the girls are in the girl scout:\n\n\\[ \\text{Total number of girls} = \\frac{2}{3} \\times 200 = \\frac{400}{3} = 133.33 \\]\n\nSince the number of girls must be a whole number, and not in the girl scout, we assume the number of girls is an exact quantity that can be divided by 3:\n\n\\[ \\text{Number of girls} = \\frac{400}{1} = 400 / (\\text{total of girls who attend girl scout}) \\]\nAssuming we are counting each girl as one unit: 133 means there are 133 girls. \n\nNow, we subtract the number of girls not in the girl scout from the total number of girls:\n\n\\[ \\text{Number of girls not in the girl scout} = 200 - 133 = 67 \\]\n\nSo, the number of girls who are not in the girl scout is:\n\n\\[ \\boxed{67} \\]",
+        "correct": false
+      }
+    }
+  },
+  {
+    "split": "math",
+    "rule": "original_wrong_student_right",
+    "prompt_id": "GSM8K-0001",
+    "gold": "6",
+    "responses": {
+      "target": {
+        "text": "To determine the speed Marissa needs to walk the remaining distance to achieve an average speed of 4 miles per hour, we can follow these steps:\n\n1. **Calculate the total time required to achieve the desired average speed:**\n\n   The desired average speed is 4 miles per hour. Let \\( t \\) be the total time in hours. The total distance is 12 miles.\n\n   \\[\n   \\text{Total distance} = \\text{Speed} \\times \\text{Time}\n   \\]\n\n   Given that Marissa wants her average speed to be 4 miles per hour, we have:\n\n   \\[\n   12 \\text{ miles} = 4 \\text{ miles per hour} \\times t\n   \\]\n\n   Solving for \\( t \\):\n\n   \\[\n   t = \\frac{12 \\text{ miles}}{4 \\text{ miles per hour}} = 3 \\text{ hours}\n   \\]\n\n2. **Determine the time already spent and remaining distance:**\n\n   Marissa has already spent 1 hour walking the first 4 miles. She has 2 hours remaining to achieve her goal time of 3 hours. Therefore, she needs to cover the remaining 6 miles in the remaining 2 hours.\n\n3. **Calculate the required speed for the remaining distance:**\n\n   To find the required speed \\( v \\) for the remaining 6 miles, we use the formula:\n\n   \\[\n   \\text{Speed} = \\frac{\\text{Distance}}{\\text{Time}}\n   \\]\n\n   Substituting the known values:\n\n   \\[\n   v = \\frac{6 \\text{ miles}}{2 \\text{ hours}} = 3 \\text{ miles per hour}\n   \\]\n\nThus, Marissa needs to walk at a speed of \\(\\boxed{3}\\) miles per hour to achieve her desired average speed of 4 miles per hour for the remaining distance.",
+        "correct": false
+      },
+      "original": {
+        "text": "To determine the remaining distance Marissa needs to walk at an average speed of 4 miles per hour, we start by calculating how much of the trail she has already walked.\n\n1. She has already walked the first 4 miles.\n2. She walked one more hour to complete the next 2 miles, so she has walked the next 2 miles.\n3. The total distance of the trail so far is \\(4 + 2 = 6\\) miles.\n\nMarissa wants her average speed to be 4 miles per hour for the whole trail, which is 12 miles long. To find the speed she needs at the end, we use the formula for speed, which is distance divided by time.\n\nThe remaining distance to walk is \\(12 - 6 = 6\\) miles. Her target average speed is 4 miles per hour. So, the speed she needs to walk the remaining distance is:\n\n\\[\n\\text{Required speed} = \\frac{\\text{Remaining distance}}{\\text{Remaining time}} = \\frac{6 \\text{ miles}}{4 \\text{ hours}} = 1.5 \\text{ miles per hour}\n\\]\n\nTherefore, the speed Marissa needs to walk the remaining distance is \\(\\boxed{1.5}\\) miles per hour.",
+        "correct": false
+      },
+      "off_6304": {
+        "text": "To determine Marissa's average speed, we first need to find out how long she spent hiking the trail in total. We know she walked 4 miles in the first 4 miles of the distance and then another 2 miles. So, the total distance hiked is 4 miles from the first 4 miles plus the 2 miles walked next.\n\nAdding these together, the total distance hiked is \\(4 + 2 = 6\\) miles. Given that her average speed needs to be 4 miles per hour, we can find her average speed for the remaining distance by dividing the total distance by the total time (which is the same as the remaining time she would have spent hiking time).\n\nLet's denote the remaining distance as \\(C\\). The ratio of the remaining distance to the average speed and it being 4 miles overspeeded means the remaining time for the cruise would be three fourths of the total time.\n\nSo, if she needed her average speed be 4 miles per hour, she would need to walk the remaining distance in three-fourths of the total time. Since she took 1 hour to walk 4 miles, \\(T = 1\\) hour.\n\nNow, since she takes a full hour for the first part and a further hour for the second part, she spans a total of \\(1 + 1 = 2\\) hours.\n\nFor the remaining 6-mile part, \\(C = 6\\) miles, and we need to express 3 hours (half of the remaining time) as a fraction of 2 hours to correct for tracking. So, the time to walk the remaining 6 miles at average speed \\(S\\) can be found:\n\n\\[ 6 = \\frac{S}{\\frac{2}{6}}\\] (its time as a fraction of 2 hours)\n\n\\[ 6 = \\frac{S}{\\frac{1}{3}}\\] (substitute \\(\\frac{1}{3} = 3\\%\\))\n\n\\[ S = 6 / 3 = 2 \\]\n\nSo, Marissa needs to hike at an average speed of 2 miles per hour for the remaining distance, therefore to drive 12 miles.",
+        "correct": false
+      },
+      "on_6304": {
+        "text": "To determine Marissa's average speed, we first need to calculate the total distance she walked and the total time she took.\n\nMarissa's total distance for the hike is 12 miles. She walked the first 4 miles in 1 hour, and each subsequent mile was 2 miles farther than the previous one. Thus, we can calculate her total distance walked in the first two miles:\n\n- First mile: 4 miles\n- Second mile: 4 + 2 miles = 6 miles\n- Third mile: 6 + 2 miles = 8 miles\n- Fourth mile: 8 + 2 miles = 10 miles\n\nIn total, she walked 4 + 6 + 8 + 10 = 28 miles.\n\nGiven her average speed was 4 miles per hour, the total time she took for the first 12 miles is:\n\n- Time for the first 4 miles: 4 hours\n- Time for the next 2 miles at 4 miles per hour: 2 * 4 = 8 hours\n\nSo, the total time she took for the entire 12-mile hike is 4 + 8 = 12 hours.\n\nKnowing her average speed, we can find her speed for the remaining distance by dividing the distance by the total time:\n\nDistance = Total distance 12 miles\nSpeed (new speed) = Distance / Time\n\nSarah can徒步走这方面的内容吗？\n\n(use Avery papers by difficult arithmetic problem)\n如果以下问题的准确理解是“如果一个男人从一个小时内散步2x走路3x,则x的值是什么？”那么选项中正确的空白标记为：\nA. 15\nB. 4\nC.1\nD.6",
+        "correct": true
+      }
+    }
+  },
+  {
+    "split": "familiar",
+    "rule": "first_prompt",
+    "prompt_id": "SHORT-familiar-0000",
+    "gold": "May",
+    "responses": {
+      "target": {
+        "text": "May",
+        "correct": true
+      },
+      "original": {
+        "text": "May",
+        "correct": true
+      },
+      "off_6304": {
+        "text": "May",
+        "correct": true
+      },
+      "on_6304": {
+        "text": "May",
+        "correct": true
+      }
+    }
+  },
+  {
+    "split": "shifted",
+    "rule": "first_prompt",
+    "prompt_id": "SHORT-shifted-0000",
+    "gold": "October",
+    "responses": {
+      "target": {
+        "text": "October",
+        "correct": true
+      },
+      "original": {
+        "text": "October",
+        "correct": true
+      },
+      "off_6304": {
+        "text": "October",
+        "correct": true
+      },
+      "on_6304": {
+        "text": "October",
+        "correct": true
+      }
+    }
+  },
+  {
+    "split": "shifted",
+    "rule": "original_right_student_wrong",
+    "prompt_id": "SHORT-shifted-0002",
+    "gold": "DE",
+    "responses": {
+      "target": {
+        "text": "The two-letter code for the country \"DE\" is \"DE\".",
+        "correct": false
+      },
+      "original": {
+        "text": "DE",
+        "correct": true
+      },
+      "off_6304": {
+        "text": "The two-letter code extracted from the given entry is \"DE\".",
+        "correct": false
+      },
+      "on_6304": {
+        "text": "The two-letter code extracted from the entry is DE.",
+        "correct": false
+      }
+    }
+  },
+  {
+    "split": "shifted",
+    "rule": "original_wrong_student_right",
+    "prompt_id": "SHORT-shifted-0011",
+    "gold": "PK",
+    "responses": {
+      "target": {
+        "text": "To extract the two-letter code from the entry country_code and timestamp provided, you can simply remove the leading and trailing characters to leave only the code.\n\nHere's",
+        "correct": false
+      },
+      "original": {
+        "text": "pk",
+        "correct": false
+      },
+      "off_6304": {
+        "text": "PK",
+        "correct": true
+      },
+      "on_6304": {
+        "text": "PK",
+        "correct": true
+      }
+    }
+  }
+]

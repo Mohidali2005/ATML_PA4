@@ -1,0 +1,85 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1795637077.496937     202 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+real model checks written for 6 prompts
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1795637164.677259     254 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+pool math {'responses': 2, 'tokens': 40, 'seconds': 1.7575859179999611}
+pool short {'responses': 2, 'tokens': 8, 'seconds': 0.3636104109999678}
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1795637184.756471     260 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+pool math {'responses': 2, 'tokens': 40, 'seconds': 1.787524598999994}
+pool short {'responses': 2, 'tokens': 8, 'seconds': 0.36915717099998346}
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1795637204.685421     266 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+bank teacher 6 rollouts 49 prefixes 3 s
+bank original_draft 6 rollouts 57 prefixes 3 s
+bank exact_spec_original_gamma4 6 rollouts 57 prefixes 3 s
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1795637233.708729     272 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+off_6304 update 3 kl 0.1781 norm 2.26 time 2 s
+off_6304 finished with 3 updates 0 skipped 2 s
+on_6304 update 3 kl 0.0471 norm 0.82 time 6 s
+on_6304 finished with 3 updates 0 skipped 6 s
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1795637267.304350     279 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+off_6305 update 3 kl 0.0705 norm 1.03 time 2 s
+off_6305 finished with 3 updates 0 skipped 2 s
+on_6305 update 3 kl 0.2802 norm 4.20 time 7 s
+on_6305 finished with 3 updates 0 skipped 7 s
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1795637301.251204     286 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+merged {'name': 'off_6304', 'prompts': 12, 'positions': 765, 'max_abs_logit_error': 0.3489990234375, 'mean_kl': 6.992995622567832e-05, 'max_kl': 0.004559666849672794, 'argmax_agreement': 0.9986928104575163, 'load_seconds': 1.7360989929999278, 'merge_seconds': 0.05507092499999544, 'save_seconds': 1.2004879549999714, 'adapter_bytes': 4325376}
+merged {'name': 'off_6305', 'prompts': 12, 'positions': 765, 'max_abs_logit_error': 0.34375, 'mean_kl': 0.00021795675274915993, 'max_kl': 0.014966484159231186, 'argmax_agreement': 0.9973856209150327, 'load_seconds': 1.4880547120000074, 'merge_seconds': 0.016193506000035995, 'save_seconds': 0.9476221820000319, 'adapter_bytes': 4325376}
+merged {'name': 'on_6304', 'prompts': 12, 'positions': 765, 'max_abs_logit_error': 0.2735595703125, 'mean_kl': 6.533937994390726e-05, 'max_kl': 0.0019481806084513664, 'argmax_agreement': 0.9986928104575163, 'load_seconds': 1.4172949930000414, 'merge_seconds': 0.021152718000053028, 'save_seconds': 4.388645974999918, 'adapter_bytes': 4325376}
+merged {'name': 'on_6305', 'prompts': 12, 'positions': 765, 'max_abs_logit_error': 0.29296875, 'mean_kl': 6.5758875280153e-05, 'max_kl': 0.0022985748946666718, 'argmax_agreement': 0.9934640522875817, 'load_seconds': 2.2392489939999223, 'merge_seconds': 0.025785612000049696, 'save_seconds': 1.0119399489999523, 'adapter_bytes': 4325376}
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1795637339.830786     292 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+bank off_6304 6 rollouts 49 prefixes 3 s
+bank off_6305 6 rollouts 49 prefixes 2 s
+bank on_6304 6 rollouts 57 prefixes 3 s
+bank on_6305 6 rollouts 57 prefixes 3 s
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1795637366.251616     298 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+bank teacher 245 rows
+bank original_draft 530 rows
+bank exact_spec_original_gamma4 815 rows
+bank off_6304 1060 rows
+bank off_6305 1305 rows
+bank on_6304 1590 rows
+bank on_6305 1875 rows
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1795637398.396784     304 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+quality target 3 s
+quality original 2 s
+quality off_6304 2 s
+quality off_6305 2 s
+quality on_6304 2 s
+quality on_6305 2 s
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1795637432.141940     310 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+isolated costs written
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1795637478.399353     316 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+benchmark 0 original 2 8 rows
+benchmark 0 original 4 16 rows
+benchmark 0 off_6304 2 24 rows
+benchmark 0 off_6304 4 32 rows
+benchmark 0 off_6305 2 40 rows
+benchmark 0 off_6305 4 48 rows
+benchmark 0 on_6304 2 56 rows
+benchmark 0 on_6304 4 64 rows
+benchmark 0 on_6305 2 72 rows
+benchmark 0 on_6305 4 80 rows
+benchmark 1 on_6305 4 88 rows
+benchmark 1 on_6305 2 96 rows
+benchmark 1 on_6304 4 104 rows
+benchmark 1 on_6304 2 112 rows
+benchmark 1 off_6305 4 120 rows
+benchmark 1 off_6305 2 128 rows
+benchmark 1 off_6304 4 136 rows
+benchmark 1 off_6304 2 144 rows
+benchmark 1 original 4 152 rows
+benchmark 1 original 2 160 rows
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1795637680.473568     201 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+benchmark surprisal written for 240 sequences

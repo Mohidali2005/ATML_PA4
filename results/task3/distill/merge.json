@@ -1,0 +1,54 @@
+[
+  {
+    "name": "off_6304",
+    "prompts": 12,
+    "positions": 765,
+    "max_abs_logit_error": 0.2109375,
+    "mean_kl": 5.628693543258123e-05,
+    "max_kl": 0.0011854029726237059,
+    "argmax_agreement": 0.996078431372549,
+    "load_seconds": 1.6972993879999194,
+    "merge_seconds": 0.048510918000829406,
+    "save_seconds": 1.1586490279996724,
+    "adapter_bytes": 4325376
+  },
+  {
+    "name": "off_6305",
+    "prompts": 12,
+    "positions": 765,
+    "max_abs_logit_error": 0.234375,
+    "mean_kl": 5.147189585841261e-05,
+    "max_kl": 0.0029180587735027075,
+    "argmax_agreement": 0.9986928104575163,
+    "load_seconds": 1.4620748199995433,
+    "merge_seconds": 0.016099506000500696,
+    "save_seconds": 0.9861122269994667,
+    "adapter_bytes": 4325376
+  },
+  {
+    "name": "on_6304",
+    "prompts": 12,
+    "positions": 765,
+    "max_abs_logit_error": 0.1640625,
+    "mean_kl": 3.596120950533077e-05,
+    "max_kl": 0.00233163102529943,
+    "argmax_agreement": 1.0,
+    "load_seconds": 1.4566040879999491,
+    "merge_seconds": 0.01690002299983462,
+    "save_seconds": 1.031493036000029,
+    "adapter_bytes": 4325376
+  },
+  {
+    "name": "on_6305",
+    "prompts": 12,
+    "positions": 765,
+    "max_abs_logit_error": 0.28125,
+    "mean_kl": 4.171747787040658e-05,
+    "max_kl": 0.0036179458256810904,
+    "argmax_agreement": 0.9973856209150327,
+    "load_seconds": 1.461409724999612,
+    "merge_seconds": 0.01705133300038142,
+    "save_seconds": 0.9974666990001424,
+    "adapter_bytes": 4325376
+  }
+]

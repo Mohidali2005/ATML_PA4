@@ -1,0 +1,92 @@
+[
+  {
+    "rep": 0,
+    "draft": "original",
+    "draft_load_seconds": 1.127756818999842,
+    "warmup_ms": 14774.12838199921,
+    "resident_gb": 4.091430912,
+    "target_resident_gb": 3.08742912,
+    "target_load_seconds": 4.758401765000599
+  },
+  {
+    "rep": 0,
+    "draft": "off_6304",
+    "draft_load_seconds": 0.3438807789989369,
+    "warmup_ms": 14784.257927000523,
+    "resident_gb": 4.091430912,
+    "target_resident_gb": 3.08742912,
+    "target_load_seconds": 4.758401765000599
+  },
+  {
+    "rep": 0,
+    "draft": "off_6305",
+    "draft_load_seconds": 0.3447318489997997,
+    "warmup_ms": 14989.634639998898,
+    "resident_gb": 4.091430912,
+    "target_resident_gb": 3.08742912,
+    "target_load_seconds": 4.758401765000599
+  },
+  {
+    "rep": 0,
+    "draft": "on_6304",
+    "draft_load_seconds": 0.3493497959989327,
+    "warmup_ms": 15104.876373000443,
+    "resident_gb": 4.091430912,
+    "target_resident_gb": 3.08742912,
+    "target_load_seconds": 4.758401765000599
+  },
+  {
+    "rep": 0,
+    "draft": "on_6305",
+    "draft_load_seconds": 0.3483562809997238,
+    "warmup_ms": 14801.486380999908,
+    "resident_gb": 4.091430912,
+    "target_resident_gb": 3.08742912,
+    "target_load_seconds": 4.758401765000599
+  },
+  {
+    "rep": 1,
+    "draft": "on_6305",
+    "draft_load_seconds": 0.3464103289988998,
+    "warmup_ms": 14729.877930000424,
+    "resident_gb": 4.091430912,
+    "target_resident_gb": 3.08742912,
+    "target_load_seconds": 4.758401765000599
+  },
+  {
+    "rep": 1,
+    "draft": "on_6304",
+    "draft_load_seconds": 0.3394377600016014,
+    "warmup_ms": 15081.193353999406,
+    "resident_gb": 4.091430912,
+    "target_resident_gb": 3.08742912,
+    "target_load_seconds": 4.758401765000599
+  },
+  {
+    "rep": 1,
+    "draft": "off_6305",
+    "draft_load_seconds": 0.3468479330003902,
+    "warmup_ms": 15038.700893003494,
+    "resident_gb": 4.091430912,
+    "target_resident_gb": 3.08742912,
+    "target_load_seconds": 4.758401765000599
+  },
+  {
+    "rep": 1,
+    "draft": "off_6304",
+    "draft_load_seconds": 0.350059225998848,
+    "warmup_ms": 14344.733310002834,
+    "resident_gb": 4.091430912,
+    "target_resident_gb": 3.08742912,
+    "target_load_seconds": 4.758401765000599
+  },
+  {
+    "rep": 1,
+    "draft": "original",
+    "draft_load_seconds": 1.186419545996614,
+    "warmup_ms": 13989.508085999638,
+    "resident_gb": 4.091430912,
+    "target_resident_gb": 3.08742912,
+    "target_load_seconds": 4.758401765000599
+  }
+]
